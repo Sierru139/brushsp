@@ -13,8 +13,8 @@
     };
 </script>
 <template>
-    <nav class="fixed w-full shadow-2xl shadow-slate-950 bg-gray-950 bg-opacity-80 backdrop-blur-md z-[999]">
-      <div class="max-w-[1440px] mx-auto flex justify-between items-center py-5 px-5 lg:px-10 border-b border-gray-700">
+    <nav class="fixed w-full shadow-sm shadow-slate-400 bg-opacity-80 backdrop-blur-md z-[999]">
+      <div class="max-w-[1440px] mx-auto flex justify-between items-center py-5 px-5 lg:px-10">
         <!-- Logo -->
         <div>
           <img class="w-40" src="/images/admin_assets/rralogo.jpg" alt="Logo">

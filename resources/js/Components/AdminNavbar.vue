@@ -19,15 +19,15 @@ import { Link } from '@inertiajs/vue3';
     };
 </script>
 <template>
-    <nav class="lg:max-w-[280px] max-lg:fixed top-0 lg:h-full max-lg:w-full bg-gray-200 bg-opacity-80 backdrop-blur-md z-[999]">
+    <nav class="lg:max-w-[280px] max-lg:fixed top-0 h-full max-lg:w-full bg-gray-200 bg-opacity-80 backdrop-blur-md z-[999]">
         <div class="max-lg:max-w-[1440px] max-lg:flex justify-between items-center mx-auto py-3 max-lg:px-2 border-gray-700">
             <!-- Logo -->
             <div class="lg:mb-12">
                 <Link :href="route('admin.index')">
-                    <img class="lg:w-48 w-32 max-sm:hidden mx-auto" src="/images/admin_assets/LOGO-ADMIN-RRA-2.png" alt="Logo">
+                    <img class="lg:w-48 w-32 max-sm:hidden mx-auto" src="/images/admin_assets/brushSp-icon.png" alt="Logo">
                 </Link>
                 <Link :href="route('admin.index')">
-                    <img class="w-16 sm:hidden mx-auto" src="/images/admin_assets/LOGO-ADMIN-RRA.png" alt="Logo">
+                    <img class="w-16 sm:hidden mx-auto" src="/images/admin_assets/brushSp-icon.png" alt="Logo">
                 </Link>
         </div>
 
@@ -37,15 +37,15 @@ import { Link } from '@inertiajs/vue3';
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin' }"
                        >
-                       Beranda
+                       Home
                 </Link>
                 <Link :href="route('course.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/class' }"
                        >
-                       Kelas/Kursus
+                       Project
                 </Link>
-                <Link :href="route('gallery.index')"
+                <!-- <Link :href="route('gallery.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/gallery' }"
                        >
@@ -56,7 +56,7 @@ import { Link } from '@inertiajs/vue3';
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/blog' }"
                        >
                        Berita
-                </Link>
+                </Link> -->
             </div>
 
             <!-- Contact Button (Always Visible) -->
@@ -81,15 +81,15 @@ import { Link } from '@inertiajs/vue3';
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin' }"
                        >
-                       Beranda
+                       Home
                 </Link>
                 <Link :href="route('course.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/class' }"
                        >
-                       Kelas/Kursus
+                       Project
                 </Link>
-                <Link :href="route('gallery.index')"
+                <!-- <Link :href="route('gallery.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/gallery' }"
                        >
@@ -100,7 +100,7 @@ import { Link } from '@inertiajs/vue3';
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/blog' }"
                        >
                        Berita
-                </Link>
+                </Link> -->
             </div>
         </div>
     </nav>
