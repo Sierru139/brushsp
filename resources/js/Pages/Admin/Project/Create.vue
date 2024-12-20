@@ -91,47 +91,39 @@ input:disabled {
                             <span class="text-red-500 text-xs">{{ form.errors.banner }}</span>
                         </div>
 
-                        <h2 class="text-2xl font-bold mb-3 border-b-2 inline-block">Tanggal</h2>
+                        <!-- <h2 class="text-2xl font-bold mb-3 border-b-2 inline-block">Tanggal</h2> -->
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
-                            <div class="col-span-3">
-                                <label for="start_date">Tanggal Mulai *</label>
-                                <input class="w-full border-0 rounded-md ring-gray-300" v-model="form.start_date" name="start_date" id="start_date" type="date">
-                                <span class="text-red-500 text-xs">{{ form.errors.start_date }}</span>
-                            </div>
 
                             <div class="col-span-3">
-                                <label for="end_date">Tanggal Berakhir *</label>
-                                <input class="w-full border-0 rounded-md ring-gray-300" v-model="form.end_date" name="end_date" id="end_date" type="date">
-                                <span class="text-red-500 text-xs">{{ form.errors.end_date }}</span>
-                            </div>
-
-                            <div class="col-span-2">
-                                <label for="times_of_meeting">Berapa Kali Pertemuan *</label>
+                                <label for="times_of_meeting">Client Name *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <input class="w-full border-0 ring-gray-300 pl-16" v-model="form.times_of_meeting" name="times_of_meeting" id="times_of_meeting" type="number">
-                                    <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div>
+                                    <input class="w-full border-0 ring-gray-300" v-model="form.times_of_meeting" name="times_of_meeting" id="times_of_meeting" type="number">
+                                    <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
+                                </div>
+                                <span class="text-red-500 text-xs">{{ form.errors.times_of_meeting }}</span>
+                            </div>
+
+                            <div class="col-span-3">
+                                <label for="times_of_meeting">Team Name *</label>
+                                <div class="relative rounded-md overflow-hidden">
+                                    <input class="w-full border-0 ring-gray-300" v-model="form.times_of_meeting" name="times_of_meeting" id="times_of_meeting" type="number">
+                                    <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
                                 <span class="text-red-500 text-xs">{{ form.errors.times_of_meeting }}</span>
                             </div>
 
                             <div class="col-span-2">
-                                <label for="duration_of_meeting">Durasi Pertemuan *</label>
+                                <label for="duration_of_meeting">Project Number *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <input class="w-full border-0 ring-gray-300 pl-16" v-model="form.duration_of_meeting" name="duration_of_meeting" id="duration_of_meeting" type="number">
-                                    <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">Jam</div>
+                                    <input class="w-full border-0 ring-gray-300" v-model="form.duration_of_meeting" name="duration_of_meeting" id="duration_of_meeting" type="text">
+                                    <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">Jam</div> -->
                                 </div>
                                 <span class="text-red-500 text-xs">{{ form.errors.duration_of_meeting }}</span>
-                            </div>
-
-                            <div class="col-span-2">
-                                <label for="schedule_img">Gambar Jadwal Pertemuan *</label>
-                                <input class="w-full border-0 rounded-md ring-gray-300" name="schedule_img" id="schedule_img" type="file" @change="scheduleFile">
-                                <span class="text-red-500 text-xs">{{ form.errors.schedule_img }}</span>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <label for="mentor_profile">Profil Mentor</label>
+                            <label for="mentor_profile">Description</label>
                             <!--<textarea class="w-full border-0 rounded-md ring-gray-300" rows="10" v-model="form.mentor_profile" name="mentor_profile" id="mentor_profile" :disabled="form.mentor_id != ''"></textarea>-->
 
                             <QuillEditor theme="snow"
@@ -141,6 +133,7 @@ input:disabled {
                                             contentType="html" name="mentor_profile" id="mentor_profile" />
                             <span class="text-red-500 text-xs">{{ form.errors.mentor_profile }}</span>
                         </div>
+                        <Link href="/mentor" class="text-blue-500 hover:text-blue-700">Back</Link>
                         <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Done</button>
                     </form>
 
