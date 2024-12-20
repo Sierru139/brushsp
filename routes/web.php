@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Foundation\Application;
@@ -23,21 +23,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->group( function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::group(['prefix' => 'class'],function () {
-            Route::get('/', [CourseController::class, 'index'])->name('course.index');
+    Route::group(['prefix' => 'project'],function () {
+            Route::get('/', [ProjectController::class, 'index'])->name('project.index');
 
-            Route::get('/detail/{slug}', [CourseController::class, 'show'])->name('course.detail');
+            Route::get('/detail/{slug}', [ProjectController::class, 'show'])->name('project.detail');
 
             // create
-            Route::get('/create', [CourseController::class, 'create'])->name('course.create');
-            Route::post('/', [CourseController::class, 'store'])->name('course.store');
+            Route::get('/create', [ProjectController::class, 'create'])->name('project.create');
+            Route::post('/', [ProjectController::class, 'store'])->name('project.store');
 
             // edit
-            Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
-            Route::post('/{id}', [CourseController::class, 'update'])->name('course.update');
+            Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+            Route::post('/{id}', [ProjectController::class, 'update'])->name('project.update');
 
             // delete
-            Route::get('/delete/{id}', [CourseController::class, 'destroy'])->name('course.delete');
+            Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
     });
 
     // Not Yet Worked - 28/11/2024

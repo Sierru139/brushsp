@@ -39,9 +39,9 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Home
                 </Link>
-                <Link :href="route('course.index')"
+                <Link :href="route('project.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/class' }"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/project' }"
                        >
                        Project
                 </Link>
@@ -61,7 +61,7 @@ import { Link } from '@inertiajs/vue3';
 
             <!-- Contact Button (Always Visible) -->
             <div class="hidden lg:block text-gray-400 p-[20px] my-8">
-                <img src="/images/admin_assets/course-vector-nobg.png" alt="" class="">
+                <img src="/images/admin_assets/brush-vec.png" alt="" class="">
             </div>
 
             <!-- Mobile Menu Icon -->
@@ -83,9 +83,9 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Home
                 </Link>
-                <Link :href="route('course.index')"
+                <Link :href="route('project.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/class' }"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/project' }"
                        >
                        Project
                 </Link>

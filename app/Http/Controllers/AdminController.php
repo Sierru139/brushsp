@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,11 +13,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $totalClass = Course::where('isActive','1')->count();
+        $totalProject = Project::where('isActive','1')->count();
         // $totalBlog = Course::where('isActive','1')->count();
         // $totalGallery = Course::where('isActive','1')->count();
         return Inertia::render('Admin/Dashboard', [
-            'totalClass' => $totalClass,
+            'totalProject' => $totalProject,
             // 'totalBlog' => $totalBlog,
             // 'totalGallery' => $totalGallery,
         ]);
