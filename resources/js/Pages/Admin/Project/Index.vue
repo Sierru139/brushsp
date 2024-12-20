@@ -34,7 +34,7 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                         </p> -->
 
                         <div class="flex flex-wrap">
-                            <Link href="">
+                            <Link :href="route('project.create')">
                                 <div class="w-[380px] h-[420px] p-2">
                                     <div class="bg-gray-300 mt-2 px-4 py-2 h-full rounded shadow flex flex-col justify-center items-center">
                                         <img src="/images/icon/add_button.png" class="mb-3 h-[200px] w-[200px] mx-auto opacity-60">

@@ -17,31 +17,6 @@ const form = useForm({
     times_of_meeting: '',
     duration_of_meeting: '',
     schedule_img: null,
-
-    price: '',
-    last_price: '',
-
-    location: '',
-    facility: '',
-    benefit: '',
-    tools: '',
-    registration_link: '',
-
-    photos1: null,
-    photos2: null,
-    photos3: null,
-    photos4: null,
-
-    description: '',
-
-    mentor_id: '',
-    mentor_name: '',
-    mentor_profile: '',
-    mentor_profile_img: null,
-    mentor_job: '',
-    mentor_fb: '',
-    mentor_ig: '',
-    mentor_twt: '',
 });
 
 const submit = () => {
@@ -66,42 +41,6 @@ const scheduleFile = (event) => {
         // console.log(event.target.files[0]);
     }
 };
-
-const photos1File = (event) => {
-    if (event.target.files.length > 0) {
-        form.photos1 = event.target.files[0];
-        // console.log(event.target.files[0]);
-    }
-};
-const photos2File = (event) => {
-    if (event.target.files.length > 0) {
-        form.photos2 = event.target.files[0];
-        // console.log(event.target.files[0]);
-    }
-};
-const photos3File = (event) => {
-    if (event.target.files.length > 0) {
-        form.photos3 = event.target.files[0];
-        // console.log(event.target.files[0]);
-    }
-};
-const photos4File = (event) => {
-    if (event.target.files.length > 0) {
-        form.photos4 = event.target.files[0];
-        // console.log(event.target.files[0]);
-    }
-};
-
-const mentorFile = (event) => {
-    if (event.target.files.length > 0) {
-        form.mentor_profile_img = event.target.files[0];
-        // console.log(event.target.files[0]);
-    }
-};
-
-const logSelectedOption = (value) => {
-    console.log('Selected Option:', form.mentor_id);
-}
 </script>
 
 <style>
