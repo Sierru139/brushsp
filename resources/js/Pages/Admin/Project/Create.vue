@@ -12,15 +12,15 @@ const form = useForm({
     title: '',
     banner: null,
 
-    start_date: '',
-    end_date: '',
-    times_of_meeting: '',
-    duration_of_meeting: '',
+    client_name: '',
+    team_name: '',
+    project_number: '',
+    description: '',
     schedule_img: null,
 });
 
 const submit = () => {
-    form.post(route('course.store'), {
+    form.post(route('project.store'), {
         onError: (errors) => {
             // Handle the errors if needed
             console.error(errors);
@@ -31,13 +31,6 @@ const submit = () => {
 const bannerFile = (event) => {
     if (event.target.files.length > 0) {
         form.banner = event.target.files[0];
-        // console.log(event.target.files[0]);
-    }
-};
-
-const scheduleFile = (event) => {
-    if (event.target.files.length > 0) {
-        form.schedule_img = event.target.files[0];
         // console.log(event.target.files[0]);
     }
 };
@@ -95,43 +88,43 @@ input:disabled {
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
 
                             <div class="col-span-3">
-                                <label for="times_of_meeting">Client Name *</label>
+                                <label for="client_name">Client Name *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <input class="w-full border-0 ring-gray-300" v-model="form.times_of_meeting" name="times_of_meeting" id="times_of_meeting" type="number">
+                                    <input class="w-full border-0 ring-gray-300" v-model="form.client_name" name="client_name" id="client_name" type="text">
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
                                 <span class="text-red-500 text-xs">{{ form.errors.times_of_meeting }}</span>
                             </div>
 
                             <div class="col-span-3">
-                                <label for="times_of_meeting">Team Name *</label>
+                                <label for="team_name">Team Name *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <input class="w-full border-0 ring-gray-300" v-model="form.times_of_meeting" name="times_of_meeting" id="times_of_meeting" type="number">
+                                    <input class="w-full border-0 ring-gray-300" v-model="form.team_name" name="team_name" id="team_name" type="text">
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
-                                <span class="text-red-500 text-xs">{{ form.errors.times_of_meeting }}</span>
+                                <span class="text-red-500 text-xs">{{ form.errors.team_name }}</span>
                             </div>
 
                             <div class="col-span-2">
-                                <label for="duration_of_meeting">Project Number *</label>
+                                <label for="project_number">Project Number *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <input class="w-full border-0 ring-gray-300" v-model="form.duration_of_meeting" name="duration_of_meeting" id="duration_of_meeting" type="text">
+                                    <input class="w-full border-0 ring-gray-300" v-model="form.project_number" name="project_number" id="project_number" type="text">
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">Jam</div> -->
                                 </div>
-                                <span class="text-red-500 text-xs">{{ form.errors.duration_of_meeting }}</span>
+                                <span class="text-red-500 text-xs">{{ form.errors.project_number }}</span>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <label for="mentor_profile">Description</label>
-                            <!--<textarea class="w-full border-0 rounded-md ring-gray-300" rows="10" v-model="form.mentor_profile" name="mentor_profile" id="mentor_profile" :disabled="form.mentor_id != ''"></textarea>-->
+                            <label for="description">Description</label>
+                            <!--<textarea class="w-full border-0 rounded-md ring-gray-300" rows="10" v-model="form.description" name="description" id="description" :disabled="form.mentor_id != ''"></textarea>-->
 
                             <QuillEditor theme="snow"
                                             :toolbar="[['bold', 'italic'], [{ 'header': 1 }], [{ 'list': 'ordered'}, { 'list': 'bullet' }]]"
-                                            v-model:content="form.mentor_profile"
+                                            v-model:content="form.description"
                                             style="height: 220px;"
-                                            contentType="html" name="mentor_profile" id="mentor_profile" />
-                            <span class="text-red-500 text-xs">{{ form.errors.mentor_profile }}</span>
+                                            contentType="html" name="description" id="description" />
+                            <span class="text-red-500 text-xs">{{ form.errors.description }}</span>
                         </div>
                         <Link href="/mentor" class="text-blue-500 hover:text-blue-700">Back</Link>
                         <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Done</button>

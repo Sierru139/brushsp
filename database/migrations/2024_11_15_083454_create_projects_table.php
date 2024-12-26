@@ -15,34 +15,14 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
 
             $table->id();
-            $table->string('title');                        // Title
-            $table->string('banner_img');                   // Banner Image
-
-            $table->date('start_date');                     // Start Date
-            $table->date('end_date');                       // End Date
-            $table->integer('times_of_meeting');            // Berapa kali pertemuan
-            $table->integer('duration_of_meeting');         // Durasi pertemuan
-            $table->string('schedule_img');                 // Jadwal dalam bentuk gambar
-            $table->string('registration_link');            // Jadwal dalam bentuk gambar
-
-            $table->string('slug');                         // Slug
-
-            $table->string('price')->nullable();            // Price
-            $table->string('last_price')->nullable();       // Discount // seperti 20% 10% etc...
-            $table->string('tools')->nullable();            // Tools
-            $table->string('location');                     // Lokasi menggunakan google maps
-            $table->string('facility');                     // Fasilitas seperti komputer, laptop, etc...
-            $table->string('benefit');                      // Benefit yang didapatkan
-
-            $table->string('photos1')->nullable();          // Foto suasana
-            $table->string('photos2')->nullable();
-            $table->string('photos3')->nullable();
-            $table->string('photos4')->nullable();
-
+            $table->string('title');
+            $table->string('banner_img');
+            $table->string('client_name');
+            $table->string('slug');
+            $table->string('team_name');
+            $table->string('project_number');
             $table->tinyInteger('isActive')->default('1');
-            $table->text('description');                    // Description
-
-            $table->foreignIdFor(Mentor::class);              // Id milik mentor
+            $table->text('description');
 
             $table->timestamps();
         });

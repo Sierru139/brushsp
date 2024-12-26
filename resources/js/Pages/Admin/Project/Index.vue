@@ -45,14 +45,8 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                             <div class="w-[380px] p-2" v-for="(item, index) in $page.props.project" :key="index">
                                 <div class="bg-gray-300 mt-2 px-4 py-2 rounded shadow">
                                     <img :src="'/storage/'+item.banner_img" class="mb-3 h-[300px] w-full ">
-                                    <div class="flex justify-between mb-1">
-                                        <p>{{ item.type }}</p>
-                                        <p>{{ item.start_date }}</p>
-                                    </div>
                                     <h3 class="text-xl">{{ item.title }}</h3>
-                                    <p>{{ item.slug }}</p>
                                     <!-- <p>{{ item.description }}</p> -->
-                                    <p>{{ item.price }}</p>
                                     <div class="space-x-2">
                                         <Link class="text-blue-600 underline" :href="route('project.edit', item.id)">edit</Link>
                                         <Link class="text-blue-600 underline" :href="route('project.delete', item.id)">delete</Link>
