@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::where('isActive', 1)->get();
+        $project = Project::latest()->paginate(100);
         return Inertia::render('Admin/Project/Index', [
             'project' => $project
         ]);
@@ -69,7 +69,7 @@ class ProjectController extends Controller
         $project->save();
 
 
-        return redirect()->route('project.index')->with('success','Sukses, anda telah menambahkan data');
+        return redirect()->route('project.index')->with('success','Success, you have added data');
 
         // Project::create([
         //     'title' => $request->title,
@@ -144,7 +144,7 @@ class ProjectController extends Controller
             $project->banner_img             = $request->banner;
         }
         $project->save();
-        return redirect()->route('project.index')->with('success','Sukses, anda telah mengubah data');
+        return redirect()->route('project.index')->with('success','Success Update Project');
     }
 
     /**
@@ -161,9 +161,24 @@ class ProjectController extends Controller
             $project->isActive = 0;
             $project->save();
 
-            return redirect()->route('project.index')->with('success','Berhasil menghapus kelas');
+            return redirect()->route('project.index')->with('success','Success deleting data');
         } catch (\Throwable $th) {
-            return redirect()->route('project.index')->with('error','Terjadi kesalahan');
+            return redirect()->route('project.index')->with('error','Something wrong');
         }
     }
+
+    public function search(Request $request)
+{
+    $project = Project::where('project_number', 'like', '%' . $request->search . '%')
+        ->orWhere('team_name', 'like', '%' . $request->search . '%')
+        ->orWhere('client_name', 'like', '%' . $request->search . '%')
+        ->orderBy('id', 'desc')
+        ->paginate(5);
+
+    // Return to Inertia with the updated search results
+    return Inertia::render('Admin/Project/Index', [
+        'project' => $project,
+        'search' => $request->search
+    ]);
+}
 }

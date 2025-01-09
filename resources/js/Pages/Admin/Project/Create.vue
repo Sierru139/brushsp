@@ -61,7 +61,7 @@ input:disabled {
 </style>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Project - Create" />
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

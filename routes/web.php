@@ -20,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->group( function () {
+Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     Route::group(['prefix' => 'project'],function () {
@@ -38,6 +38,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group( function () {
 
             // delete
             Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+
+            // search
+            Route::get('/search',[ProjectController::class, 'search']);
+
     });
 
     // Not Yet Worked - 28/11/2024

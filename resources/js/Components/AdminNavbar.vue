@@ -19,8 +19,8 @@ import { Link } from '@inertiajs/vue3';
     };
 </script>
 <template>
-    <nav class="lg:max-w-[280px] max-lg:fixed top-0 h-full max-lg:w-full bg-gray-200 bg-opacity-80 backdrop-blur-md z-[999]">
-        <div class="max-lg:max-w-[1440px] max-lg:flex justify-between items-center mx-auto py-3 max-lg:px-2 border-gray-700">
+    <nav class="lg:max-w-[280px] max-lg:fixed top-0 h-full max-lg:w-full">
+        <div class="max-lg:max-w-[1440px] max-lg:flex justify-between items-center mx-auto py-3 max-lg:px-2 border-gray-700 bg-gray-200 bg-opacity-80 backdrop-blur-md z-[999]">
             <!-- Logo -->
             <div class="lg:mb-12">
                 <Link :href="route('admin.index')">
@@ -35,13 +35,13 @@ import { Link } from '@inertiajs/vue3';
             <div class="hidden lg:block py-3 rounded-3xl text-gray-800">
                 <Link :href="route('admin.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin' }"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/' }"
                        >
                        Home
                 </Link>
                 <Link :href="route('project.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/project' }"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
                        >
                        Project
                 </Link>

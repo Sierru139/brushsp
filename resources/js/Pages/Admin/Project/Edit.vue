@@ -80,13 +80,13 @@ input:disabled {
 </style>
 
 <template>
-    <Head title="Class Edit" />
+    <Head title="Project - Edit" />
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200 shadow sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h3 class="text-3xl mb-3"><b>Add Project</b></h3>
+                    <h3 class="text-3xl mb-3"><b>Edit Project</b></h3>
 
                     <form @submit.prevent="submit" enctype="multipart/form-data" class="mt-2 p-4">
                         <input type="hidden" name="_token" :value="csrfToken">

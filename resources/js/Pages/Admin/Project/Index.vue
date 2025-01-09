@@ -1,11 +1,9 @@
-<script setup>
-import { Head, Link } from '@inertiajs/vue3';
-</script>
+
 <script>
 import AdminNavbar from '@/Components/AdminNavbar.vue'
 </script>
 <template>
-    <Head title="Dashboard Class" />
+    <Head title="Dashboard" />
         <div class="lg:flex">
             <AdminNavbar></AdminNavbar>
             <div class="w-full max-lg:mt-[80px]">
@@ -17,6 +15,14 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                         <h3 class="text-3xl mb-3">
                             <b>Projects</b>
                         </h3>
+                        <input
+                            class="bg-gray-50 outline-none ml-1 block w-full"
+                            type="text"
+                            name=""
+                            id=""
+                            placeholder="search..."
+                            v-model="search"
+                        />
                         <!-- Success message -->
                         <div v-if="$page.props.flash.success" class="bg-[#d4edda] mb-4 p-4">
                             <b class="text-[#155724]">
@@ -42,12 +48,20 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                     </div>
                                 </div>
                             </Link>
-                            <div class="w-[380px] p-2" v-for="(item, index) in $page.props.project" :key="index">
-                                <div class="bg-gray-300 mt-2 px-4 py-2 rounded shadow">
-                                    <img :src="'/storage/'+item.banner_img" class="mb-3 h-[300px] w-full ">
+                            <div class="w-[380px] p-2" v-for="(item, index) in $page.props.project.data" :key="index">
+                                <div class="bg-gray-300 mt-2 p-2 rounded shadow h-full flex flex-col">
+                                    <div class="my-2">
+                                        <span class="px-2 py-1 rounded">{{ item.project_number }}</span>
+                                    </div>
+                                    <img :src="'/storage/'+item.banner_img" class="mb-3 h-[300px] w-full rounded-md border">
                                     <h3 class="text-xl">{{ item.title }}</h3>
                                     <!-- <p>{{ item.description }}</p> -->
-                                    <div class="space-x-2">
+                                    <div class="flex flex-wrap gap-1 mt-2">
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Client : {{ item.client_name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Team : {{ item.team_name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Related Person : {{ item.client_name }}</span>
+                                    </div>
+                                    <div class="space-x-2 grow flex items-end">
                                         <Link class="text-blue-600 underline" :href="route('project.edit', item.id)">edit</Link>
                                         <Link class="text-blue-600 underline" :href="route('project.delete', item.id)">delete</Link>
                                         <Link class="text-blue-600 underline" :href="route('project.detail', item.slug)">detail</Link>
@@ -60,9 +74,42 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Pagination -->
+                        <div class="mt-[20px] ml-2">
+                        <button
+                            class="p-2 bg-gray-300 mr-2 rounded-sm"
+                            v-for="(link, index) in $page.props.project.links"
+                            :key="index"
+                            :disabled="!link.url"
+                            @click="navigate(link.url)"
+                            :class="{ 'bg-gray-400': link.active }"
+                            v-html="link.label"
+                        >
+                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 </template>
+<script setup>
+import { Head, Link } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3'
+import { ref } from "vue";
+import { watch } from "vue";
+import { Inertia } from "@inertiajs/inertia";
+
+const { props } = usePage()
+const projects = props.projects
+const navigate = (url) => {
+  if (url) {
+    window.location.href = url
+  }
+}
+let search = ref("");
+watch(search, (value) => {
+  Inertia.get('/project/search', { search: value }, {
+    preserveState: true,
+  });
+});
+</script>

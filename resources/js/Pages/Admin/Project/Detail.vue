@@ -4,13 +4,13 @@ import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Class - Detail" />
+    <Head title="Project - Detail" />
 
         <template>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Detail Kelas
+                Project Detail
             </h2>
         </template>
 
@@ -22,10 +22,10 @@ import { Head, Link } from '@inertiajs/vue3';
 
                     <div class="p-6 text-gray-900">
                         <h3 class="text-3xl mb-3">
-                            <b>Kelas</b>
+                            <b>Project</b>
                         </h3>
                         <p class="mb-3 text-right">
-                            <Link class="py-1 px-3 bg-gray-300 rounded" :href="route('project.index')">Kembali</Link>
+                            <Link class="py-1 px-3 bg-gray-300 rounded" :href="route('project.index')">Back</Link>
                         </p>
 
                         <div class="">
