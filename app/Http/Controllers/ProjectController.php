@@ -74,16 +74,6 @@ class ProjectController extends Controller
 
 
         return redirect()->route('project.index')->with('success','Success, you have added data');
-
-        // Project::create([
-        //     'title' => $request->title,
-        //     'type' => $request->type,
-        //     'banner_img' => $fileName,
-        //     'start_date' => $request->start_date,
-        //     'slug' => Str::slug($request->title).'-'.Str::random(6),
-        //     'price' => $request->price,
-        //     'description' => $request->description,
-        // ]);
     }
 
     /**

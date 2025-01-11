@@ -5,6 +5,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,42 +43,81 @@ Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
 
             //
             Route::get('/search',[ProjectController::class, 'search'])->name('project.search');
+    });
 
+    Route::group(['prefix' => 'clients'],function () {
+            Route::get('/', [ClientController::class, 'index'])->name('clients.index');
+
+            Route::get('/detail/{slug}', [ClientController::class, 'show'])->name('clients.detail');
+
+            // create
+            Route::get('/create', [ClientController::class, 'create'])->name('clients.create');
+            Route::post('/', [ClientController::class, 'store'])->name('clients.store');
+
+            // edit
+            Route::get('/edit/{id}', [ClientController::class, 'edit'])->name('clients.edit');
+            Route::post('/{id}', [ClientController::class, 'update'])->name('clients.update');
+
+            // delete
+            Route::get('/delete/{id}', [ClientController::class, 'destroy'])->name('clients.delete');
+
+            //
+            Route::get('/search',[ClientController::class, 'search'])->name('clients.search');
+    });
+
+    Route::group(['prefix' => 'teams'],function () {
+            Route::get('/', [TeamController::class, 'index'])->name('teams.index');
+
+            Route::get('/detail/{slug}', [TeamController::class, 'show'])->name('teams.detail');
+
+            // create
+            Route::get('/create', [TeamController::class, 'create'])->name('teams.create');
+            Route::post('/', [TeamController::class, 'store'])->name('teams.store');
+
+            // edit
+            Route::get('/edit/{id}', [TeamController::class, 'edit'])->name('teams.edit');
+            Route::post('/{id}', [TeamController::class, 'update'])->name('teams.update');
+
+            // delete
+            Route::get('/delete/{id}', [TeamController::class, 'destroy'])->name('teams.delete');
+
+            //
+            Route::get('/search',[TeamController::class, 'search'])->name('teams.search');
     });
 
     // Not Yet Worked - 28/11/2024
-    Route::group(['prefix' => 'gallery'],function () {
-            Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
+    // Route::group(['prefix' => 'gallery'],function () {
+    //         Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
 
 
-            // create
-            Route::get('/create', [GalleryController::class, 'create'])->name('gallery.create');
-            Route::post('/', [GalleryController::class, 'store'])->name('gallery.store');
+    //         // create
+    //         Route::get('/create', [GalleryController::class, 'create'])->name('gallery.create');
+    //         Route::post('/', [GalleryController::class, 'store'])->name('gallery.store');
 
-            // edit
-            Route::get('/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
-            Route::post('/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    //         // edit
+    //         Route::get('/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
+    //         Route::post('/{id}', [GalleryController::class, 'update'])->name('gallery.update');
 
-            // delete
-            Route::get('/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.delete');
-    });
+    //         // delete
+    //         Route::get('/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.delete');
+    // });
 
-    // Not Yet Worked - 28/11/2024
-    Route::group(['prefix' => 'blog'],function () {
-            Route::get('/', [BlogController::class, 'index'])->name('blog.index');
+    // // Not Yet Worked - 28/11/2024
+    // Route::group(['prefix' => 'blog'],function () {
+    //         Route::get('/', [BlogController::class, 'index'])->name('blog.index');
 
 
-            // create
-            Route::get('/create', [BlogController::class, 'create'])->name('blog.create');
-            Route::post('/', [BlogController::class, 'store'])->name('blog.store');
+    //         // create
+    //         Route::get('/create', [BlogController::class, 'create'])->name('blog.create');
+    //         Route::post('/', [BlogController::class, 'store'])->name('blog.store');
 
-            // edit
-            Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
-            Route::post('/{id}', [BlogController::class, 'update'])->name('blog.update');
+    //         // edit
+    //         Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    //         Route::post('/{id}', [BlogController::class, 'update'])->name('blog.update');
 
-            // delete
-            Route::get('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
-    });
+    //         // delete
+    //         Route::get('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+    // });
 });
 
 
