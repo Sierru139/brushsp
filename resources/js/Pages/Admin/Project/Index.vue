@@ -15,14 +15,22 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                         <h3 class="text-3xl mb-3">
                             <b>Projects</b>
                         </h3>
-                        <input
-                            class="bg-gray-50 outline-none ml-1 block w-full"
-                            type="text"
-                            name=""
-                            id=""
-                            placeholder="search..."
-                            v-model="search"
-                        />
+                        <div class="flex">
+                            <!-- <Link :href="route('project.index')" class="bg-gray-100  py-2 px-4 whitespace-nowrap border border-black hover:bg-gray-200">GO BACK</Link> -->
+                            <input
+                                class="bg-gray-50 outline-none ml-1 block w-full rounded"
+                                type="text"
+                                placeholder="Search..."
+                                v-model="search"
+                                @keydown.enter="performSearch"
+                            />
+                            <button
+                                class="ml-2 p-2 bg-gray-400 hover:bg-gray-500 text-white rounded"
+                                @click="search = ''; performSearch()"
+                            >
+                                Reset
+                            </button>
+                        </div>
                         <!-- Success message -->
                         <div v-if="$page.props.flash.success" class="bg-[#d4edda] mb-4 p-4">
                             <b class="text-[#155724]">
@@ -41,8 +49,8 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
 
                         <div class="flex flex-wrap">
                             <Link :href="route('project.create')">
-                                <div class="w-[380px] h-[420px] p-2">
-                                    <div class="bg-gray-300 mt-2 px-4 py-2 h-full rounded shadow flex flex-col justify-center items-center">
+                                <div class="w-[380px] h-full p-2">
+                                    <div class="bg-gray-300 hover:bg-[#c3c6cc] duration-100 mt-2 px-4 py-2 h-full rounded shadow flex flex-col justify-center items-center">
                                         <img src="/images/icon/add_button.png" class="mb-3 h-[200px] w-[200px] mx-auto opacity-60">
                                         <h3 class="text-xl">Add New Project</h3>
                                     </div>
@@ -107,9 +115,11 @@ const navigate = (url) => {
   }
 }
 let search = ref("");
-watch(search, (value) => {
-  Inertia.get('/project/search', { search: value }, {
-    preserveState: true,
-  });
-});
+const performSearch = () => {
+  if (search.value) {
+    Inertia.get('/project/search', { search: search.value }, {
+      preserveState: true,
+    });
+  }
+};
 </script>

@@ -39,8 +39,8 @@ Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
             // delete
             Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
 
-            // search
-            Route::get('/search',[ProjectController::class, 'search']);
+            //
+            Route::get('/search',[ProjectController::class, 'search'])->name('project.search');
 
     });
 

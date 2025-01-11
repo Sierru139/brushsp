@@ -43,7 +43,19 @@ import { Link } from '@inertiajs/vue3';
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
                        >
-                       Project
+                       Projects
+                </Link>
+                <Link :href="route('project.index')"
+                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
+                       >
+                       Clients
+                </Link>
+                <Link :href="route('project.index')"
+                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
+                       >
+                       Teams
                 </Link>
                 <!-- <Link :href="route('gallery.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
@@ -88,6 +100,18 @@ import { Link } from '@inertiajs/vue3';
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/project' }"
                        >
                        Project
+                </Link>
+                <Link :href="route('project.index')"
+                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/project' }"
+                       >
+                       Clients
+                </Link>
+                <Link :href="route('project.index')"
+                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/project' }"
+                       >
+                       Teams
                 </Link>
                 <!-- <Link :href="route('gallery.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"

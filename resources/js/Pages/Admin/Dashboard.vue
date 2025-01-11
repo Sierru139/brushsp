@@ -49,7 +49,7 @@ export default {
                         </div>
                         <div class="grow">
                             <h3 class="text-2xl font-bold">{{ $page.props.totalProject }}</h3>
-                            <p class="sm:text-sm text-xs opacity-70">Active Project</p>
+                            <p class="sm:text-sm text-xs opacity-70">Project</p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default {
                         </div>
                         <div class="grow">
                             <h3 class="text-2xl font-bold">2</h3>
-                            <p class="sm:text-sm text-xs opacity-70">Blog</p>
+                            <p class="sm:text-sm text-xs opacity-70">Client</p>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ export default {
                         </div>
                         <div class="grow">
                             <h3 class="text-2xl font-bold">4</h3>
-                            <p class="sm:text-sm text-xs opacity-70">Galeri</p>
+                            <p class="sm:text-sm text-xs opacity-70">Team</p>
                         </div>
                     </div>
                 </div>

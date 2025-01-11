@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Mentor;
+use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -43,10 +45,11 @@ class ProjectController extends Controller
             'title'                 => 'required|min:5',
 
             'banner'                => 'required|mimes:jpeg,png,jpg,webp|max:10240',
+            'project_number_a'      => 'required',
+            'project_number_b'      => 'required',
 
             'client_name'           => 'required',
             'team_name'             => 'required',
-            'project_number'        => 'required',
             'description'           => 'required|min:5',
         ]);
 
@@ -55,14 +58,15 @@ class ProjectController extends Controller
         $bannerPath = $request->file('banner')->store('project/banner', 'public');
 
         $project = new Project();
+        $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
 
         $project->title                 =   $request->title;
+
 
         $project->banner_img            =   $bannerPath;
         $project->client_name           =   $request->client_name;
         $project->team_name             =   $request->team_name;
         $project->slug                  =   Str::slug($request->title).'-'.Str::random(6);
-        $project->project_number        =   $request->project_number;
 
         $project->description           =   $request->description;
 
@@ -131,10 +135,10 @@ class ProjectController extends Controller
             $project->banner_img = $request->banner;
         }
 
+        $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
         $project->title                  =   $request->title;
         $project->client_name            =   $request->client_name;
         $project->team_name              =   $request->team_name;
-        $project->project_number         =   $request->project_number;
         $project->description            =   $request->description;
 
         if ($request->new_banner !== null) {
@@ -168,17 +172,23 @@ class ProjectController extends Controller
     }
 
     public function search(Request $request)
-{
-    $project = Project::where('project_number', 'like', '%' . $request->search . '%')
-        ->orWhere('team_name', 'like', '%' . $request->search . '%')
-        ->orWhere('client_name', 'like', '%' . $request->search . '%')
-        ->orderBy('id', 'desc')
-        ->paginate(5);
+    {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
 
-    // Return to Inertia with the updated search results
-    return Inertia::render('Admin/Project/Index', [
-        'project' => $project,
-        'search' => $request->search
-    ]);
-}
+        $searchTerm = $request->input('search');
+
+        FacadesDB::enableQueryLog(); // Mengaktifkan query logging
+
+        $project = Project::query()
+            ->where('project_number', 'like', '%' . $searchTerm . '%')
+            ->orWhere('team_name', 'like', '%' . $searchTerm . '%')
+            ->orWhere('client_name', 'like', '%' . $searchTerm . '%')
+            ->orWhere('title', 'like', '%' . $searchTerm . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+        return Inertia::render('Admin/Project/Index', ['project' => $project]);
+    }
 }
