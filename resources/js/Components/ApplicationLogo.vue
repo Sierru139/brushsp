@@ -1,3 +1,4 @@
 <template>
-    <img src="/images/rralogo.jpg" alt="">
+    <!-- <img src="/images/rralogo.jpg" alt=""> -->
+     <h1></h1>
 </template>

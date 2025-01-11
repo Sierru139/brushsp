@@ -5,7 +5,7 @@ const date = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Makassar' 
 </script>
 
 <script>
-import AdminNavbar from '@/Components/ADminNavbar.vue';
+import AdminNavbar from '@/Components/AdminNavbar.vue';
 export default {
         data() {
             return {
@@ -45,11 +45,11 @@ export default {
                 <div class="lg:flex-[33.3333%] flex-[50%] lg:grow-0 grow px-2">
                     <div class="flex p-6 bg-white rounded-xl border text-gray-700 items-center">
                         <div class="pr-4 ">
-                            <i class="fa-solid fa-graduation-cap text-3xl"></i>
+                            <i class="fa-solid fa-project text-3xl"></i>
                         </div>
                         <div class="grow">
-                            <h3 class="text-2xl font-bold">{{ $page.props.totalClass }}</h3>
-                            <p class="sm:text-sm text-xs opacity-70">Kelas yang Aktif</p>
+                            <h3 class="text-2xl font-bold">{{ $page.props.totalProject }}</h3>
+                            <p class="sm:text-sm text-xs opacity-70">Project</p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default {
                         </div>
                         <div class="grow">
                             <h3 class="text-2xl font-bold">2</h3>
-                            <p class="sm:text-sm text-xs opacity-70">Blog</p>
+                            <p class="sm:text-sm text-xs opacity-70">Client</p>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ export default {
                         </div>
                         <div class="grow">
                             <h3 class="text-2xl font-bold">4</h3>
-                            <p class="sm:text-sm text-xs opacity-70">Galeri</p>
+                            <p class="sm:text-sm text-xs opacity-70">Team</p>
                         </div>
                     </div>
                 </div>
