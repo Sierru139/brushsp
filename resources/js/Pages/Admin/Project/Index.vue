@@ -24,12 +24,17 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                 v-model="search"
                                 @keydown.enter="performSearch"
                             />
-                            <button
+                            <!-- <button
                                 class="ml-2 p-2 bg-gray-400 hover:bg-gray-500 text-white rounded"
                                 @click="search = ''; performSearch()"
                             >
                                 Reset
-                            </button>
+                            </button> -->
+                            <Link :href="route('project.index')"
+                                    class="ml-2 p-2 bg-gray-400 hover:bg-gray-500 text-white rounded">
+                                    Reset
+                            </Link>
+
                         </div>
                         <!-- Success message -->
                         <div v-if="$page.props.flash.success" class="bg-[#d4edda] mb-4 p-4">
