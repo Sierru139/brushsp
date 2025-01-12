@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ClientController extends Controller
