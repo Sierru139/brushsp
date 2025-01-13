@@ -7,6 +7,7 @@ use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Str;
 
 class ClientController extends Controller
 {
@@ -36,7 +37,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'                 => 'required|min:5',
+            'name'                 => 'required|min:3',
         ]);
 
 

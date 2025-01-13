@@ -46,45 +46,53 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                         <!-- <p class="mb-3 text-right">
                             <Link class="py-1 px-3 bg-gray-300 rounded" :href="route('client.create')">Make New</Link>
                         </p> -->
-                            <!-- <table>
-                                <tr>
-                                    <th>Name</th>
-                                </tr>
-                                <tr v-for="(item, index) in $page.props.clients.data" :key="index">
-                                    <td>{{ item.name }}</td>
-                                </tr>
-                            </table> -->
-                            <div class="overflow-x-auto my-8">
-                                <table class="w-full border border-black">
-                                    <thead class="bg-[#b8b8b8]">
-                                        <tr class=" text-left">
-                                            <th class="p-2 whitespace-nowrap text-xs w-[15%]">No.</th>
-                                            <th class="p-2 whitespace-nowrap text-xs">Name</th>
-                                            <!-- <th class="whitespace-nowrap text-xs">Action</th> -->
-                                            <!-- <th class="whitespace-nowrap text-xs">スターテス</th>
-                                            <th class="whitespace-nowrap text-xs text-center">アクション</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(item, index) in $page.props.clients.data"
-                                            :key="index"
-                                            class="">
-                                            <td class="p-2 w-[15%]">
-                                                {{ index }}
-                                            </td>
-                                            <td class="p-2">
-                                                {{ item.name }}
-                                            </td>
-                                            <!-- <td class="text-center">
-                                                &nbsp;
-                                                <Link class="btn btn-outline-primary py-1 px-2"
-                                                        :href="route('client.destroy',item.id)">
+                        <p class="my-6">
+                            <Link :href="route('clients.create')" class="mt-20 bg-gray-400 py-2 px-4 hover:bg-gray-300">Add client</Link>
+                        </p>
+                            <table class="w-full my-6">
+                                <thead class="text-left">
+                                    <tr class="bg-[#c3c3c3] border border-black">
+                                        <th class="p-4 w-[10%]">No</th>
+                                        <th class="p-4">Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-for="(item, index) in $page.props.clients.data" :key="index">
+                                    <tr class="border border-black">
+                                        <td class="p-4 w-[10%]">{{ index + 1 }}</td>
+                                        <td class="p-4">{{ item.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                                                </Link>
-                                            </td> -->
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <!-- <div class="flex flex-wrap">
+                            <Link :href="route('clients.create')">
+                                <div class="w-[380px] h-full p-2">
+                                    <div class="bg-gray-300 hover:bg-[#c3c6cc] duration-100 mt-2 px-4 py-2 h-full rounded shadow flex flex-col justify-center items-center">
+                                        <img src="/images/icon/add_button.png" class="mb-3 h-[200px] w-[200px] mx-auto opacity-60">
+                                        <h3 class="text-xl">Add New Project</h3>
+                                    </div>
+                                </div>
+                            </Link>
+                            <div class="w-[380px] p-2" v-for="(item, index) in clients" :key="index">
+                                <div class="bg-gray-300 mt-2 p-2 rounded shadow h-full flex flex-col">
+                                    <h3 class="text-xl">{{ item.title }}</h3>
+                                    <p>{{ item.description }}</p>
+                                    <div class="flex flex-wrap gap-1 mt-2">
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Client : {{ item.client_name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Team : {{ item.team_name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Related Person : {{ item.client_name }}</span>
+                                    </div>
+                                    <div class="space-x-2 grow flex items-end">
+                                        <Link class="text-blue-600 underline" :href="route('clients.edit', item.id)">edit</Link>
+                                        <Link class="text-blue-600 underline" :href="route('clients.delete', item.id)">delete</Link>
+                                        <Link class="text-blue-600 underline" :href="route('clients.detail', item.slug)">detail</Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="$page.props.clients.length < 1 " class="lg:w-[380px] h-[420px] p-2">
+                                <div class="mt-2 px-4 py-2 h-full flex flex-col justify-center items-center">
+                                    <p class="text-center my-4">No Data Shown</p>
+                                </div>
                             </div>
                         <div class="mt-[20px] ml-2">
                         <button
@@ -119,10 +127,10 @@ const navigate = (url) => {
 }
 let search = ref("");
 const performSearch = () => {
-  if (search.value) {
-    Inertia.get('/clients/search', { search: search.value }, {
-      preserveState: true,
-    });
-  }
+    if (search.value) {
+        Inertia.get('/clients/search', { search: search.value }, {
+        preserveState: true,
+        });
+    }
 };
 </script>

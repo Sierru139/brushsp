@@ -146,7 +146,7 @@ input:disabled {
                             <span class="text-red-500 text-xs">{{ form.errors.description }}</span>
                         </div>
                         <Link href="/mentor" class="text-blue-500 hover:text-blue-700">Back</Link>
-                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Done</button>
+                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Enter</button>
                     </form>
 
                 </div>

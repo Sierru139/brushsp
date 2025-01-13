@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\Mentor;
+use App\Models\Client;
+use App\Models\Team;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
@@ -21,7 +22,7 @@ class ProjectController extends Controller
     {
         $project = Project::latest()->paginate(100);
         return Inertia::render('Admin/Project/Index', [
-            'project' => $project
+            'project' => $project,
         ]);
     }
 
@@ -32,7 +33,8 @@ class ProjectController extends Controller
     {
         // $project = Project::all();
         return Inertia::render('Admin/Project/Create', [
-            'mentor' => Mentor::all(),
+            'client' => Client::all(),
+            'team' => Team::all(),
         ]);
     }
 
@@ -55,17 +57,17 @@ class ProjectController extends Controller
 
 
         // Saving To Database
-        $bannerPath = $request->file('banner')->store('project/banner', 'public');
+        // $bannerPath = $request->file('banner')->store('project/banner', 'public');
 
         $project = new Project();
-        $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
+        // $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
 
-        $project->title                 =   $request->title;
+        // $project->title                 =   $request->title;
 
 
-        $project->banner_img            =   $bannerPath;
+        // $project->banner_img            =   $bannerPath;
         $project->client_name           =   $request->client_name;
-        $project->team_name             =   $request->team_name;
+        // $project->team_name             =   $request->team_name;
         $project->slug                  =   Str::slug($request->title).'-'.Str::random(6);
 
         $project->description           =   $request->description;
@@ -73,7 +75,7 @@ class ProjectController extends Controller
         $project->save();
 
 
-        return redirect()->route('project.index')->with('success','Success, you have added data');
+        return redirect()->route('client.index')->with('success','Success, you have added data');
     }
 
     /**
@@ -93,7 +95,6 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $project = Project::with('mentor')->find($id);
-        $mentors = Mentor::all();
         return Inertia::render('Admin/Project/Edit', [
             'project' => $project,
             'mentors' => $mentors
