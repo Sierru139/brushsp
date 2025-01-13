@@ -46,13 +46,22 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                         <!-- <p class="mb-3 text-right">
                             <Link class="py-1 px-3 bg-gray-300 rounded" :href="route('client.create')">Make New</Link>
                         </p> -->
-                            <table>
-                                <tr>
-                                    <th>Name</th>
-                                </tr>
-                                <tr v-for="(item, index) in $page.props.clients.data" :key="index">
-                                    <td>{{ item.name }}</td>
-                                </tr>
+                        <p class="my-6">
+                            <Link :href="route('clients.create')" class="mt-20 bg-gray-400 py-2 px-4 hover:bg-gray-300">Add client</Link>
+                        </p>
+                            <table class="w-full my-6">
+                                <thead class="text-left">
+                                    <tr class="bg-[#c3c3c3] border border-black">
+                                        <th class="p-4 w-[10%]">No</th>
+                                        <th class="p-4">Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-for="(item, index) in $page.props.clients.data" :key="index">
+                                    <tr class="border border-black">
+                                        <td class="p-4 w-[10%]">{{ index + 1 }}</td>
+                                        <td class="p-4">{{ item.name }}</td>
+                                    </tr>
+                                </tbody>
                             </table>
 
                         <!-- <div class="flex flex-wrap">
@@ -120,10 +129,10 @@ const navigate = (url) => {
 }
 let search = ref("");
 const performSearch = () => {
-  if (search.value) {
-    Inertia.get('/clients/search', { search: search.value }, {
-      preserveState: true,
-    });
-  }
+    if (search.value) {
+        Inertia.get('/clients/search', { search: search.value }, {
+        preserveState: true,
+        });
+    }
 };
 </script>

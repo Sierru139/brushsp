@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Str;
 
 class TeamController extends Controller
 {
@@ -14,10 +16,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $team = Team::latest()->paginate(20);
+        $teams = Client::latest()->paginate(20);
         return Inertia::render('Admin/Team/Index', [
-            'team' => $team
-        ]);        //
+            'teams' => $teams
+        ]);
     }
 
     /**
@@ -35,7 +37,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'                 => 'required|min:5',
+            'name'                 => 'required|min:3',
         ]);
 
 
@@ -48,8 +50,7 @@ class TeamController extends Controller
         $team->slug                  =   Str::slug($request->name).'-'.Str::random(6);
         $team->save();
 
-
-        return redirect()->route('teams.index')->with('success','Success, you have added data');
+        return redirect()->route('team.index')->with('success','Success, you have added data');
     }
 
     /**

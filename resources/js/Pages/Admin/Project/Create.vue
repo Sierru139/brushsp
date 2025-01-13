@@ -125,9 +125,8 @@ input:disabled {
                                             id="client_name"
                                             v-model="form.client_name"
                                             class="w-full border-0 ring-gray-300">
-                                        <option value="Client_1">Client_1</option>
-                                        <option value="Client_2">Client_2</option>
-                                        <option value="Client_3">Client_3</option>
+                                        <!-- <option value="Client_2">Test</option> -->
+                                        <option v-for="(item, index) in $page.props.client" :key="index" :value="item.id">{{ item.name }}</option>
                                     </select>
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
@@ -142,9 +141,8 @@ input:disabled {
                                             id="team_name"
                                             v-model="form.team_name"
                                             class="w-full border-0 ring-gray-300">
-                                        <option>Team A</option>
-                                        <option>Team B</option>
-                                        <option>Team C</option>
+                                            <option v-for="(item, index) in $page.props.team" :key="index" :value="item.id">{{ item.name }}</option>
+
                                     </select>
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
@@ -164,7 +162,7 @@ input:disabled {
                             <span class="text-red-500 text-xs">{{ form.errors.description }}</span>
                         </div>
                         <Link href="/mentor" class="text-blue-500 hover:text-blue-700">Back</Link>
-                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Done</button>
+                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Enter</button>
                     </form>
 
                 </div>

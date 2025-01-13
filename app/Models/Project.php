@@ -12,8 +12,12 @@ class Project extends Model
 
     protected $guarded = [];
 
-    public function mentor() {
-        return $this->belongsTo(Mentor::class);
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function team() {
+        return $this->belongsTo(Team::class);
     }
 
 }
