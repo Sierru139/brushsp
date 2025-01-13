@@ -49,20 +49,20 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                         <p class="my-6">
                             <Link :href="route('clients.create')" class="mt-20 bg-gray-400 py-2 px-4 hover:bg-gray-300">Add client</Link>
                         </p>
-                            <table class="w-full my-6">
-                                <thead class="text-left">
-                                    <tr class="bg-[#c3c3c3] border border-black">
-                                        <th class="p-4 w-[10%]">No</th>
-                                        <th class="p-4">Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody v-for="(item, index) in $page.props.clients.data" :key="index">
-                                    <tr class="border border-black">
-                                        <td class="p-4 w-[10%]">{{ index + 1 }}</td>
-                                        <td class="p-4">{{ item.name }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <table class="w-full my-6">
+                            <thead class="text-left">
+                                <tr class="bg-[#c3c3c3] border border-gray-400">
+                                    <th class="p-4 w-[10%]">No</th>
+                                    <th class="p-4">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody v-for="(item, index) in $page.props.clients.data" :key="index">
+                                <tr class="border border-gray-400">
+                                    <td class="p-4 w-[10%]">{{ index + 1 }}</td>
+                                    <td class="p-4">{{ item.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <!-- <div class="flex flex-wrap">
                             <Link :href="route('clients.create')">
@@ -73,7 +73,7 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                     </div>
                                 </div>
                             </Link>
-                            <div class="w-[380px] p-2" v-for="(item, index) in clients" :key="index">
+                            <div class="w-[380px] p-2" v-for="(item, index) in client" :key="index">
                                 <div class="bg-gray-300 mt-2 p-2 rounded shadow h-full flex flex-col">
                                     <h3 class="text-xl">{{ item.title }}</h3>
                                     <p>{{ item.description }}</p>
@@ -95,22 +95,23 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                 </div>
                             </div>
                         <div class="mt-[20px] ml-2">
-                        <button
-                            class="p-2 bg-gray-300 mr-2 rounded-sm"
-                            v-for="(link, index) in $page.props.clients.links"
-                            :key="index"
-                            :disabled="!link.url"
-                            @click="navigate(link.url)"
-                            :class="{ 'bg-gray-400': link.active }"
-                            v-html="link.label"
-                        >
-                        </button>
                         </div>
-                    </div>
+                    </div> -->
+                    <button
+                        class="p-2 bg-gray-300 mr-2 rounded-sm"
+                        v-for="(link, index) in $page.props.clients.links"
+                        :key="index"
+                        :disabled="!link.url"
+                        @click="navigate(link.url)"
+                        :class="{ 'bg-gray-400': link.active }"
+                        v-html="link.label"
+                    >
+                    </button>
                 </div>
             </div>
         </div>
-</template>
+        </div>
+        </template>
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3'

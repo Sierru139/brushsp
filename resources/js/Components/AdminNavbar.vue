@@ -39,12 +39,6 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Home
                 </Link>
-                <Link :href="route('project.index')"
-                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
-                       >
-                       Projects
-                </Link>
                 <Link :href="route('clients.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/clients' }"
@@ -56,6 +50,12 @@ import { Link } from '@inertiajs/vue3';
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/teams' }"
                        >
                        Teams
+                </Link>
+                <Link :href="route('project.index')"
+                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
+                       >
+                       Projects
                 </Link>
                 <!-- <Link :href="route('gallery.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
@@ -95,12 +95,6 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Home
                 </Link>
-                <Link :href="route('project.index')"
-                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
-                       >
-                       Project
-                </Link>
                 <Link :href="route('clients.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/clients' }"
@@ -112,6 +106,12 @@ import { Link } from '@inertiajs/vue3';
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/teams' }"
                        >
                        Teams
+                </Link>
+                <Link :href="route('project.index')"
+                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
+                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project' }"
+                       >
+                       Project
                 </Link>
                 <!-- <Link :href="route('gallery.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"

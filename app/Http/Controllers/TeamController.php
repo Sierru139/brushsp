@@ -16,8 +16,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Client::latest()->paginate(20);
-        return Inertia::render('Admin/Team/Index', [
+        $teams = Team::latest()->paginate(20);
+        return Inertia::render('Admin/Teams/Index', [
             'teams' => $teams
         ]);
     }
@@ -28,7 +28,7 @@ class TeamController extends Controller
     public function create()
     {
         // $project = Project::all();
-        return Inertia::render('Admin/Team/Create');
+        return Inertia::render('Admin/Teams/Create');
     }
 
     /**
@@ -50,13 +50,13 @@ class TeamController extends Controller
         $team->slug                  =   Str::slug($request->name).'-'.Str::random(6);
         $team->save();
 
-        return redirect()->route('team.index')->with('success','Success, you have added data');
+        return redirect()->route('teams.index')->with('success','Success, you have added data');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(client $client)
+    public function show(Team $client)
     {
         //
     }
@@ -64,7 +64,7 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(client $client)
+    public function edit(Team $client)
     {
         //
     }
@@ -72,7 +72,7 @@ class TeamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateclientRequest $request, client $client)
+    public function update(UpdateclientRequest $request, Team $client)
     {
         //
     }
@@ -80,7 +80,7 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(client $client)
+    public function destroy(Team $client)
     {
         //
     }

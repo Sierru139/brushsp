@@ -11,6 +11,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 const form = useForm({
     // title: '',
     name: '',
+    related_person: '',
 });
 
 console.log(form.project_number_a)
@@ -71,6 +72,15 @@ input:disabled {
                                 <label for="name">Client Name *</label>
                                 <input class="w-full border-0 rounded-md ring-gray-300"
                                         v-model="form.name"
+                                        name="name" id="name"
+                                        type="text"
+                                        placeholder="Name...">
+                                <span class="text-red-500 text-xs">{{ form.errors.name }}</span>
+                            </div>
+                            <div class="mb-4 col-span-3">
+                                <label for="name">Related Person *</label>
+                                <input class="w-full border-0 rounded-md ring-gray-300"
+                                        v-model="form.related_person"
                                         name="name" id="name"
                                         type="text"
                                         placeholder="Name...">

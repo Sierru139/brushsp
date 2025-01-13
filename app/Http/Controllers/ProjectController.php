@@ -20,7 +20,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::latest()->paginate(100);
+        $project = Project::where('isActive', 1)->with(['client', 'team'])->latest()->paginate(100);
         return Inertia::render('Admin/Project/Index', [
             'project' => $project,
         ]);
@@ -50,24 +50,25 @@ class ProjectController extends Controller
             'project_number_a'      => 'required',
             'project_number_b'      => 'required',
 
-            'client_name'           => 'required',
-            'team_name'             => 'required',
+            'client_id'           => 'required',
+            'team_id'             => 'required',
             'description'           => 'required|min:5',
         ]);
 
 
         // Saving To Database
-        // $bannerPath = $request->file('banner')->store('project/banner', 'public');
+        $bannerPath = $request->file('banner')->store('project/banner', 'public');
 
         $project = new Project();
-        // $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
 
-        // $project->title                 =   $request->title;
+        $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
+        $project->title                 =   $request->title;
 
 
-        // $project->banner_img            =   $bannerPath;
-        $project->client_name           =   $request->client_name;
-        // $project->team_name             =   $request->team_name;
+        $project->banner_img            =   $bannerPath;
+        $project->client_id             =   $request->client_id;
+        $project->team_id               =   $request->team_id;
+        $project->isActive              =   1;
         $project->slug                  =   Str::slug($request->title).'-'.Str::random(6);
 
         $project->description           =   $request->description;
@@ -75,7 +76,7 @@ class ProjectController extends Controller
         $project->save();
 
 
-        return redirect()->route('client.index')->with('success','Success, you have added data');
+        return redirect()->route('project.index')->with('success','Success, you have added data');
     }
 
     /**
@@ -94,10 +95,9 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        $project = Project::with('mentor')->find($id);
+        $project = Project::with('client', 'team')->find($id);
         return Inertia::render('Admin/Project/Edit', [
             'project' => $project,
-            'mentors' => $mentors
         ]);
     }
 
@@ -174,7 +174,6 @@ class ProjectController extends Controller
 
         $project = Project::query()
             ->where('project_number', 'like', '%' . $searchTerm . '%')
-            ->orWhere('team_name', 'like', '%' . $searchTerm . '%')
             ->orWhere('client_name', 'like', '%' . $searchTerm . '%')
             ->orWhere('title', 'like', '%' . $searchTerm . '%')
             ->orderBy('id', 'desc')

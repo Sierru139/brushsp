@@ -1,6 +1,14 @@
 
 <script>
-import AdminNavbar from '@/Components/AdminNavbar.vue'
+export default {
+    methods: {
+        formatDate(dateString) {
+            const date = new Date(dateString);
+                // Then specify how you want your dates to be formatted
+            return new Intl.DateTimeFormat('default', {dateStyle: 'long'}).format(date);
+        }
+    }
+}
 </script>
 <template>
     <Head title="Dashboard" />
@@ -70,10 +78,11 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                     <h3 class="text-xl">{{ item.title }}</h3>
                                     <!-- <p>{{ item.description }}</p> -->
                                     <div class="flex flex-wrap gap-1 mt-2">
-                                        <span class="bg-gray-100 py-1 px-2 inline-block">Client : {{ item.client_name }}</span>
-                                        <span class="bg-gray-100 py-1 px-2 inline-block">Team : {{ item.team_name }}</span>
-                                        <span class="bg-gray-100 py-1 px-2 inline-block">Related Person : {{ item.client_name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Client : {{ item.client.name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Team : {{ item.team.name }}</span>
+                                        <span class="bg-gray-100 py-1 px-2 inline-block">Related Person : {{ item.client.related_person }}</span>
                                     </div>
+                                    <p>{{ formatDate(item.created_at) }}</p>
                                     <div class="space-x-2 grow flex items-end">
                                         <Link class="text-blue-600 underline" :href="route('project.edit', item.id)">edit</Link>
                                         <Link class="text-blue-600 underline" :href="route('project.delete', item.id)">delete</Link>
@@ -107,6 +116,7 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
 </template>
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import AdminNavbar from '@/Components/AdminNavbar.vue'
 import { usePage } from '@inertiajs/vue3'
 import { ref } from "vue";
 import { watch } from "vue";

@@ -47,7 +47,8 @@ class ClientController extends Controller
         $client = new Client();
 
         $client->name                 =   $request->name;
-        $client->slug                  =   Str::slug($request->name).'-'.Str::random(6);
+        $client->related_person       =   $request->related_person;
+        $client->slug                 =   Str::slug($request->name).'-'.Str::random(6);
         $client->save();
 
         return redirect()->route('clients.index')->with('success','Success, you have added data');

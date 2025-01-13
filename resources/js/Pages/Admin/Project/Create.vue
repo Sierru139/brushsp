@@ -13,8 +13,8 @@ const form = useForm({
     banner: null,
     project_number_a: '',
     project_number_b: '',
-    client_name: '',
-    team_name: '',
+    client_id: '',
+    team_id: '',
     description: '',
     schedule_img: null,
 });
@@ -118,15 +118,15 @@ input:disabled {
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
 
                             <div class="col-span-3">
-                                <label for="client_name">Client Name *</label>
+                                <label for="client_id">Client Name *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <!-- <input class="w-full border-0 ring-gray-300" v-model="form.client_name" name="client_name" id="client_name" type="text"> -->
-                                     <select name="client_name"
-                                            id="client_name"
-                                            v-model="form.client_name"
+                                    <!-- <input class="w-full border-0 ring-gray-300" v-model="form.client_id" name="client_id" id="client_id" type="text"> -->
+                                     <select name="client_id"
+                                            id="client_id"
+                                            v-model="form.client_id"
                                             class="w-full border-0 ring-gray-300">
                                         <!-- <option value="Client_2">Test</option> -->
-                                        <option v-for="(item, index) in $page.props.client" :key="index" :value="item.id">{{ item.name }}</option>
+                                        <option v-for="(item, index) in $page.props.client" :key="index" :value="item.id">{{ item.name }} - {{ item.related_person }}</option>
                                     </select>
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
@@ -134,19 +134,19 @@ input:disabled {
                             </div>
 
                             <div class="col-span-3">
-                                <label for="team_name">Team Name *</label>
+                                <label for="team_id">Team Name *</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <!-- <input class="w-full border-0 ring-gray-300" v-model="form.team_name" name="team_name" id="team_name" type="text"> -->
-                                    <select name="team_name"
-                                            id="team_name"
-                                            v-model="form.team_name"
+                                    <!-- <input class="w-full border-0 ring-gray-300" v-model="form.team_id" name="team_id" id="team_id" type="text"> -->
+                                    <select name="team_id"
+                                            id="team_id"
+                                            v-model="form.team_id"
                                             class="w-full border-0 ring-gray-300">
                                             <option v-for="(item, index) in $page.props.team" :key="index" :value="item.id">{{ item.name }}</option>
 
                                     </select>
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
-                                <span class="text-red-500 text-xs">{{ form.errors.team_name }}</span>
+                                <span class="text-red-500 text-xs">{{ form.errors.team_id }}</span>
                             </div>
                         </div>
 
