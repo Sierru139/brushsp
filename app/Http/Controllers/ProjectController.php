@@ -61,7 +61,7 @@ class ProjectController extends Controller
 
         $project = new Project();
 
-        $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
+        $project->project_number         =   $request->project_number_a . '-' . $request->project_number_b;
         $project->title                 =   $request->title;
 
 
@@ -98,6 +98,8 @@ class ProjectController extends Controller
         $project = Project::with('client', 'team')->find($id);
         return Inertia::render('Admin/Project/Edit', [
             'project' => $project,
+            'clients' => Client::all(),
+            'teams' => Team::all(),
         ]);
     }
 
@@ -109,8 +111,8 @@ class ProjectController extends Controller
         $request->validate([
             'title'                  => 'required|min:5',
             // 'new_banner'            => 'required|mimes:jpeg,png,jpg,webp|max:10240',
-            'client_name'            => 'required',
-            'team_name'              => 'required',
+            'client_id'            => 'required',
+            'team_id'              => 'required',
             'project_number'         => 'required',
             'description'            => 'required|min:5',
 
@@ -128,8 +130,8 @@ class ProjectController extends Controller
 
         $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
         $project->title                  =   $request->title;
-        $project->client_name            =   $request->client_name;
-        $project->team_name              =   $request->team_name;
+        $project->client_id             =   $request->client_id;
+        $project->team_id               =   $request->team_id;
         $project->description            =   $request->description;
 
         if ($request->new_banner !== null) {
@@ -174,11 +176,19 @@ class ProjectController extends Controller
 
         $project = Project::query()
             ->where('project_number', 'like', '%' . $searchTerm . '%')
-            ->orWhere('client_name', 'like', '%' . $searchTerm . '%')
+            ->orWhereHas('client', function($query) use ($searchTerm)
+            {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            })
             ->orWhere('title', 'like', '%' . $searchTerm . '%')
             ->orderBy('id', 'desc')
-            ->paginate(5);
+            ->with(['client', 'team'])
+            ->latest()
+            ->paginate(50);;
 
-        return Inertia::render('Admin/Project/Index', ['project' => $project]);
+
+        return Inertia::render('Admin/Project/Index', [
+            'project' => $project,
+        ]);
     }
 }
