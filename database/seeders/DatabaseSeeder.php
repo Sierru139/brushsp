@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$VrIb8TCDLsvBVCX4RIR7ZeYNX9fob4WNy32cIdYGmazgtDpWL3zly', // admin
             'email' => 'admin@gmail.com',
         ]);
+        $this->call(ClientSeeder::class);
+        $this->call(TeamSeeder::class);
     }
 }

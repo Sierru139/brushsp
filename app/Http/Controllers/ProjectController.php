@@ -96,8 +96,12 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $project = Project::with('client', 'team')->find($id);
+        $clients = Client::all();
+        $teams = Team::all();
         return Inertia::render('Admin/Project/Edit', [
             'project' => $project,
+            'clients' => $clients,
+            'teams' => $teams,
         ]);
     }
 
