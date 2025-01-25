@@ -70,6 +70,7 @@ input:disabled {
             <div class="overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200 shadow sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-3xl mb-3"><b>Add Project</b></h3>
+								<!-- <pre>{{ form.project_number_a }} - {{ form.project_number_b}}</pre> -->
                         <form @submit.prevent="submit" enctype="multipart/form-data" class="mt-2 p-4">
                         <input type="hidden" name="_token" :value="csrfToken">
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
@@ -77,12 +78,12 @@ input:disabled {
                                 <label for="project_number_b">Project Number *</label>
                                 <div class="">
                                     <div class="relative rounded-md flex items-center">
+                                        <input type="text" name="project_number_a" v-model="form.project_number_a" id="project_number_a" class="w-[80px]">
                                         <!-- <select name="project_number_a" v-model="form.project_number_a" id="project_number_a">
                                             <option value="A">A</option>
                                             <option value="B">B</option>
                                             <option value="C">C</option>
                                         </select> -->
-                                        <input type="text" v-model="form.project_number_a" id="project_number_a" class="w-[60px]">
                                         <span class="mx-3"> - </span>
                                         <input class="w-full border-0 ring-gray-300 rounded-md"
                                                 v-model="form.project_number_b"

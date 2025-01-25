@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Team;
+use Str;
 
 class TeamSeeder extends Seeder
 {
@@ -13,26 +14,25 @@ class TeamSeeder extends Seeder
      */
     public function run(): void
     {
-        Team::factory()->create([
+        Team::insert([
             'name' => 'Flex',
-            'slug' => 'Flex',
+            'slug' => Str::slug('Flex'),
         ]);
-        Team::factory()->create([
+        Team::insert([
             'name' => 'Sachi',
-            'slug' => 'Sachi',
+            'slug' => Str::slug('Sachi'),
         ]);
-        Team::factory()->create([
+        Team::insert([
             'name' => 'Wakuwaku',
-            'slug' => 'Wakuwaku',
+            'slug' => Str::slug('Wakuwaku'),
         ]);
-        Team::factory()->create([
+        Team::insert([
             'name' => 'Subscription',
-            'slug' => 'Subscription',
+            'slug' => Str::slug('Subscription'),
         ]);
-        Team::factory()->create([
+        Team::insert([
             'name' => 'Semarang',
-            'slug' => 'Semarang',
+            'slug' => Str::slug('Semarang'),
         ]);
-
     }
 }

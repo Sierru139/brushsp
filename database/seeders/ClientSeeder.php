@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Client;
+use Str;
 
 class ClientSeeder extends Seeder
 {
@@ -13,17 +14,20 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::factory()->create([
-            'name' => 'Client 1',
-            'slug' => 'Client',
+        Client::insert([
+            'name' => 'Testing 12',
+            'slug' => Str::slug('Testing 12'),
+            'related_person' => 'person',
         ]);
-        Client::factory()->create([
-            'name' => 'Client 2',
-            'slug' => 'Client',
+        Client::insert([
+            'name' => 'Test 22',
+            'slug' => Str::slug('Test 22'),
+            'related_person' => 'person2',
         ]);
-        Client::factory()->create([
-            'name' => 'Client 3',
-            'slug' => 'Client',
+        Client::insert([
+            'name' => 'Client',
+            'slug' => Str::slug('Client'),
+            'related_person' => 'person3',
         ]);
     }
 }
