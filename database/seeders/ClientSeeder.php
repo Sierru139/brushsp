@@ -15,19 +15,19 @@ class ClientSeeder extends Seeder
     public function run(): void
     {
         Client::insert([
-            'name' => 'Testing 12',
+            'name_jp' => 'Testing 12',
+            'name_en' => 'person',
             'slug' => Str::slug('Testing 12'),
-            'related_person' => 'person',
         ]);
         Client::insert([
-            'name' => 'Test 22',
+            'name_jp' => 'Test 22',
+            'name_en' => 'person2',
             'slug' => Str::slug('Test 22'),
-            'related_person' => 'person2',
         ]);
         Client::insert([
-            'name' => 'Client',
+            'name_jp' => 'Client',
+            'name_en' => 'person3',
             'slug' => Str::slug('Client'),
-            'related_person' => 'person3',
         ]);
     }
 }

@@ -59,7 +59,7 @@ export default {
                             <i class="fa-solid fa-building text-3xl"></i>
                         </div>
                         <div class="grow">
-                            <h3 class="text-2xl font-bold">2</h3>
+                            <h3 class="text-2xl font-bold">{{ $page.props.totalClient }}</h3>
                             <p class="sm:text-sm text-xs opacity-70">Client</p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ export default {
                             <i class="fa-solid fa-users text-3xl"></i>
                         </div>
                         <div class="grow">
-                            <h3 class="text-2xl font-bold">4</h3>
+                            <h3 class="text-2xl font-bold">{{ $page.props.totalTeam }}</h3>
                             <p class="sm:text-sm text-xs opacity-70">Team</p>
                         </div>
                     </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Client;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,12 +16,12 @@ class AdminController extends Controller
     public function index()
     {
         $totalProject = Project::where('isActive','1')->count();
-        // $totalBlog = Course::where('isActive','1')->count();
-        // $totalGallery = Course::where('isActive','1')->count();
+        $totalClient = Client::all()->count();
+        $totalTeam = Team::all()->count();
         return Inertia::render('Admin/Dashboard', [
             'totalProject' => $totalProject,
-            // 'totalBlog' => $totalBlog,
-            // 'totalGallery' => $totalGallery,
+            'totalClient' => $totalClient,
+            'totalTeam' => $totalTeam,
         ]);
     }
 

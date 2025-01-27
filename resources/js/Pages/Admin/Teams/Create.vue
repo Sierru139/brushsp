@@ -80,7 +80,7 @@ input:disabled {
 
 
                         <Link href="/team" class="text-blue-500 hover:text-blue-700">Back</Link>
-                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Enter</button>
+                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Save</button>
                     </form>
 
                 </div>

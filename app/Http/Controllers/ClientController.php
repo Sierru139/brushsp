@@ -37,7 +37,8 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'                 => 'required|min:3',
+            'name_jp'                 => 'required',
+            'name_en'                 => 'required',
         ]);
 
 
@@ -46,8 +47,8 @@ class ClientController extends Controller
 
         $client = new Client();
 
-        $client->name                 =   $request->name;
-        $client->related_person       =   $request->related_person;
+        $client->name_jp                 =   $request->name_jp;
+        $client->name_en       =   $request->name_en;
         $client->slug                 =   Str::slug($request->name).'-'.Str::random(6);
         $client->save();
 
@@ -76,6 +77,34 @@ class ClientController extends Controller
     public function update(UpdateclientRequest $request, client $client)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        $searchTerm = $request->input('search');
+
+        FacadesDB::enableQueryLog(); // Mengaktifkan query logging
+
+        $client = Client::query()
+            ->where('name_jp', 'like', '%' . $searchTerm . '%')
+            ->orWhereHas('name_en', function($query) use ($searchTerm)
+            {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhere('title', 'like', '%' . $searchTerm . '%')
+            ->orderBy('id', 'desc')
+            ->with(['client', 'team'])
+            ->latest()
+            ->paginate(50);;
+
+
+        return Inertia::render('Admin/Client/Index', [
+            'client' => $client,
+        ]);
     }
 
     /**

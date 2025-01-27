@@ -20,7 +20,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::where('isActive', 1)->with(['client', 'team'])->latest()->paginate(100);
+        $project = Project::where('isActive', 1)->with(['client', 'team'])->latest()->paginate(25);
         return Inertia::render('Admin/Project/Index', [
             'project' => $project,
         ]);
@@ -186,7 +186,7 @@ class ProjectController extends Controller
             ->orderBy('id', 'desc')
             ->with(['client', 'team'])
             ->latest()
-            ->paginate(50);;
+            ->paginate(25);;
 
 
         return Inertia::render('Admin/Project/Index', [

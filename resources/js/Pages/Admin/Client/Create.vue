@@ -10,8 +10,9 @@ import { QuillEditor } from '@vueup/vue-quill'
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 const form = useForm({
     // title: '',
-    name: '',
-    related_person: '',
+    name_jp: '',
+    name_en: '',
+    // related_person: '',
 });
 
 console.log(form.project_number_a)
@@ -69,28 +70,28 @@ input:disabled {
                         <input type="hidden" name="_token" :value="csrfToken">
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4 items-center justify-center">
                             <div class="mb-4 col-span-3">
-                                <label for="name">Client Name *</label>
+                                <label for="name_jp">Client Name* <span class="text-sm opacity-85">(Japan)</span></label>
                                 <input class="w-full border-0 rounded-md ring-gray-300"
-                                        v-model="form.name"
-                                        name="name" id="name"
+                                        v-model="form.name_jp"
+                                        name="name_jp" id="name_jp"
                                         type="text"
-                                        placeholder="Name...">
-                                <span class="text-red-500 text-xs">{{ form.errors.name }}</span>
+                                        placeholder="株式会社あいホーム">
+                                <span class="text-red-500 text-xs">{{ form.errors.name_jp }}</span>
                             </div>
                             <div class="mb-4 col-span-3">
-                                <label for="name">Related Person *</label>
+                                <label for="name_en">Client Name* <span class="text-sm opacity-85">(Eng)</span></label>
                                 <input class="w-full border-0 rounded-md ring-gray-300"
-                                        v-model="form.related_person"
-                                        name="name" id="name"
+                                        v-model="form.name_en"
+                                        name="name_en" id="name_en"
                                         type="text"
-                                        placeholder="Name...">
-                                <span class="text-red-500 text-xs">{{ form.errors.name }}</span>
+                                        placeholder="Ai Home">
+                                <span class="text-red-500 text-xs">{{ form.errors.name_en }}</span>
                             </div>
                         </div>
 
 
                         <Link href="/mentor" class="text-blue-500 hover:text-blue-700">Back</Link>
-                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Enter</button>
+                        <button type="submit" class="py-1 px-3 bg-gray-300 hover:bg-gray-400 duration-100 rounded">Save</button>
                     </form>
 
                 </div>

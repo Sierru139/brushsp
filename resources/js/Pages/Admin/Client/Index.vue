@@ -53,13 +53,15 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                             <thead class="text-left">
                                 <tr class="bg-[#c3c3c3] border border-gray-400">
                                     <th class="p-4 w-[10%]">No</th>
-                                    <th class="p-4">Name</th>
+                                    <th class="p-4">Name (JP)</th>
+                                    <th class="p-4">Name (EN)</th>
                                 </tr>
                             </thead>
                             <tbody v-for="(item, index) in $page.props.clients.data" :key="index">
                                 <tr class="border border-gray-400">
                                     <td class="p-4 w-[10%]">{{ index + 1 }}</td>
-                                    <td class="p-4">{{ item.name }}</td>
+                                    <td class="p-4">{{ item.name_jp }}</td>
+                                    <td class="p-4">{{ item.name_en }}</td>
                                 </tr>
                             </tbody>
                         </table>
