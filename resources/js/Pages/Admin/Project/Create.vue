@@ -3,7 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { reactive, ref, createApp } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill'
-
 // const app = createApp()
 // app.component('QuillEditor', QuillEditor)
 
@@ -16,7 +15,6 @@ const form = useForm({
     client_id: '',
     team_id: '',
     description: '',
-    schedule_img: null,
 });
 
 console.log(form.project_number_a)
@@ -35,6 +33,18 @@ const bannerFile = (event) => {
         form.banner = event.target.files[0];
         // console.log(event.target.files[0]);
     }
+};
+
+const addLeadingZeros = (value, length = 4) => {
+    return value.length < length ? value.toString().padStart(length, '0') : value;
+};
+
+const handleProjectNumberInput = (event) => {
+    let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length === 1) {
+        value = value.padStart(1, '0'); // Add a single leading zero for single digits
+    }
+    form.project_number_b = value; // Update form value
 };
 </script>
 
@@ -78,7 +88,7 @@ input:disabled {
                                 <label for="project_number_b">Project Number *</label>
                                 <div class="">
                                     <div class="relative rounded-md flex items-center">
-                                        <input type="text" name="project_number_a" v-model="form.project_number_a" id="project_number_a" class="w-[80px]">
+                                        <input type="text" name="project_number_a" v-model="form.project_number_a" id="project_number_a" class="w-[80px]" style="text-transform: uppercase;">
                                         <!-- <select name="project_number_a" v-model="form.project_number_a" id="project_number_a">
                                             <option value="A">A</option>
                                             <option value="B">B</option>
@@ -86,9 +96,10 @@ input:disabled {
                                         </select> -->
                                         <span class="mx-3"> - </span>
                                         <input class="w-full border-0 ring-gray-300 rounded-md"
-                                                v-model="form.project_number_b"
+                                                :value="form.project_number_b"
                                                 name="project_number_b"
                                                 id="project_number_b"
+                                                @input="handleProjectNumberInput"
                                                 type="number"
                                                 placeholder="Type a number...">
                                         <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">Jam</div> -->
@@ -127,7 +138,7 @@ input:disabled {
                                             v-model="form.client_id"
                                             class="w-full border-0 ring-gray-300">
                                         <!-- <option value="Client_2">Test</option> -->
-                                        <option v-for="(item, index) in $page.props.client" :key="index" :value="item.id">{{ item.name }} - {{ item.related_person }}</option>
+                                        <option v-for="(item, index) in $page.props.client" :key="index" :value="item.id">{{ item.name_jp }} - {{ item.name_en }}</option>
                                     </select>
                                     <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>

@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Inertia\Inertia;
 use Str;
 
@@ -75,6 +76,28 @@ class TeamController extends Controller
     public function update(UpdateclientRequest $request, Team $client)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        $searchTerm = $request->input('search');
+
+        FacadesDB::enableQueryLog(); // Mengaktifkan query logging
+
+        $team = Team::query()
+            ->where('name', 'like', '%' . $searchTerm . '%')
+            ->orderBy('id', 'desc')
+            ->latest()
+            ->paginate(25);;
+
+
+        return Inertia::render('Admin/Teams/Index', [
+            'teams' => $team,
+        ]);
     }
 
     /**

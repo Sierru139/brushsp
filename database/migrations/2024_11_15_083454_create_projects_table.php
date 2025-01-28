@@ -23,10 +23,10 @@ return new class extends Migration
             $table->foreignIdFor(Client::class);
             $table->foreignIdFor(Team::class);
             $table->string('slug');
+            $table->string('project_code');
             $table->string('project_number');
             $table->tinyInteger('isActive')->default('1');
             $table->text('description');
-
             $table->timestamps();
         });
     }

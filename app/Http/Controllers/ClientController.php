@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Inertia\Inertia;
 use Str;
 
@@ -91,19 +92,14 @@ class ClientController extends Controller
 
         $client = Client::query()
             ->where('name_jp', 'like', '%' . $searchTerm . '%')
-            ->orWhereHas('name_en', function($query) use ($searchTerm)
-            {
-                $query->where('name', 'like', '%' . $searchTerm . '%');
-            })
-            ->orWhere('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('name_en', 'like', '%' . $searchTerm . '%')
             ->orderBy('id', 'desc')
-            ->with(['client', 'team'])
             ->latest()
-            ->paginate(50);;
+            ->paginate(25);;
 
 
         return Inertia::render('Admin/Client/Index', [
-            'client' => $client,
+            'clients' => $client,
         ]);
     }
 

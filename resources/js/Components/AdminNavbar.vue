@@ -57,7 +57,7 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Teams
                 </Link>
-                <Link :href="route('teams.index')"
+                <Link :href="route('projectCode.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project-code' }"
                        >
@@ -119,7 +119,7 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Teams
                 </Link>
-                <Link :href="route('teams.index')"
+                <Link :href="route('projectCode.index')"
                        class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
                        :class="{ 'bg-[#375980] text-gray-50': $page.url === '/project-code' }"
                        >

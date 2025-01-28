@@ -41,14 +41,14 @@ import { Head, Link } from '@inertiajs/vue3';
                                     <img :src="'/storage/'+$page.props.project.banner_img" alt="" width="400" height="275">
                                 </div>
                                 <br>
-                                <h2>Client name : <br>{{$page.props.project.client.name_jp}} - {{$page.props.project.client.name_en}}</h2>
+                                <h2>Client name : <br>{{$page.props.project.client_name}}</h2>
                                 <br>
-                                <h2>Team name : <br>{{$page.props.project.team.name}}</h2>
+                                <h2>Team name : <br>{{$page.props.project.team_name}}</h2>
                                 <br>
                                 <h2>Project number : <br>{{$page.props.project.project_number}}</h2>
                                 <br>
                                 <div class="customHtml">
-                                    Description : <br>
+                                    Deskripsi : <br>
                                     <div v-html="$page.props.project.description"></div>
                                 </div>
                                 <br>

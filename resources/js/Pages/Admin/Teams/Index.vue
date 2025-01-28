@@ -133,7 +133,7 @@ const navigate = (url) => {
 let search = ref("");
 const performSearch = () => {
   if (search.value) {
-    Inertia.get('/project/search', { search: search.value }, {
+    Inertia.get('/teams/search', { search: search.value }, {
       preserveState: true,
     });
   }

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\ProjectCodeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -83,6 +84,26 @@ Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
 
             //
             Route::get('/search',[TeamController::class, 'search'])->name('teams.search');
+    });
+
+    Route::group(['prefix' => 'project-code'],function () {
+            Route::get('/', [ProjectCodeController::class, 'index'])->name('projectCode.index');
+
+            Route::get('/detail/{slug}', [ProjectCodeController::class, 'show'])->name('projectCode.detail');
+
+            // create
+            Route::get('/create', [ProjectCodeController::class, 'create'])->name('projectCode.create');
+            Route::post('/', [ProjectCodeController::class, 'store'])->name('projectCode.store');
+
+            // edit
+            Route::get('/edit/{id}', [ProjectCodeController::class, 'edit'])->name('projectCode.edit');
+            Route::post('/{id}', [ProjectCodeController::class, 'update'])->name('projectCode.update');
+
+            // delete
+            Route::get('/delete/{id}', [ProjectCodeController::class, 'destroy'])->name('projectCode.delete');
+
+            //
+            Route::get('/search',[ProjectCodeController::class, 'search'])->name('projectCode.search');
     });
 
     // Not Yet Worked - 28/11/2024

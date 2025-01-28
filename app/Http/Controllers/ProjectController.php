@@ -61,7 +61,8 @@ class ProjectController extends Controller
 
         $project = new Project();
 
-        $project->project_number         =   $request->project_number_a . '-' . $request->project_number_b;
+        $project->project_code          =   strtoupper($request->project_number_a);
+        $project->project_number        =   $request->project_number_b;
         $project->title                 =   $request->title;
 
 
@@ -84,7 +85,7 @@ class ProjectController extends Controller
      */
     public function show(string $slug)
     {
-        $projectNow = Project::where('slug', $slug)->first();
+        $projectNow = Project::where('slug', $slug)->with(['client', 'team'])->first();
         return Inertia::render('Admin/Project/Detail', [
             'project' => $projectNow
         ]);
@@ -180,8 +181,13 @@ class ProjectController extends Controller
             ->where('project_number', 'like', '%' . $searchTerm . '%')
             ->orWhereHas('client', function($query) use ($searchTerm)
             {
-                $query->where('name', 'like', '%' . $searchTerm . '%');
+                $query->where('name_jp', 'like', '%' . $searchTerm . '%');
             })
+            ->orWhereHas('client', function($query) use ($searchTerm)
+            {
+                $query->where('name_en', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhere('project_code', 'like', '%' . $searchTerm . '%')
             ->orWhere('title', 'like', '%' . $searchTerm . '%')
             ->orderBy('id', 'desc')
             ->with(['client', 'team'])
