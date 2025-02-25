@@ -36,7 +36,6 @@ const submit = () => {
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
-
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
@@ -69,14 +68,11 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <!-- <div class="mt-4 block">
+            <div class="mt-4 block">
                 <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
+                    <Link class="ms-2 text-sm text-gray-600 underline" :href="route('register')">Register</Link>
                 </label>
-            </div> -->
+            </div>
 
             <div class="mt-4 flex items-center justify-end">
                 <PrimaryButton

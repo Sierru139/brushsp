@@ -1,7 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, usePage} from '@inertiajs/vue3';
-const date = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Makassar' })
+const date = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Tokyo' })
+
 </script>
 
 <script>
@@ -15,7 +16,7 @@ export default {
         },
         mounted() {
             setInterval(()=>{
-                    this.dateTime = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Makassar', hour12: false})
+                    this.dateTime = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Tokyo', hour12: false})
                 }, 300)
         },
         methods: {
@@ -32,7 +33,7 @@ export default {
     <div class="flex">
         <AdminNavbar></AdminNavbar>
         <div class="w-full bg-gray-200 max-lg:mt-[80px]">
-            <div class="text-center my-10">
+            <div class="text-center mb-6 mt-10">
                 <span class="text-6xl text-gray-700">
                     {{ dateTime }}
                 </span>
@@ -41,6 +42,11 @@ export default {
                     {{ date }}
                 </span>
             </div>
+
+            <div class="my-3 text-center">
+                <p>Hello {{ $page.props.user.name }} !</p>
+            </div>
+
             <div class="flex flex-wrap w-full py-6 gap-y-4">
                 <div class="lg:flex-[33.3333%] flex-[50%] lg:grow-0 grow px-2">
                     <div class="flex p-6 bg-white rounded-xl border text-gray-700 items-center">

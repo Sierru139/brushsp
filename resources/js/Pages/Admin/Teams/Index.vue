@@ -24,12 +24,10 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                 v-model="search"
                                 @keydown.enter="performSearch"
                             />
-                            <button
-                                class="ml-2 p-2 bg-gray-400 hover:bg-gray-500 text-white rounded"
-                                @click="search = ''; performSearch()"
-                            >
-                                Reset
-                            </button>
+                            <Link :href="route('teams.index')"
+                                    class="ml-2 p-2 bg-gray-400 hover:bg-gray-500 text-white rounded">
+                                    Reset
+                            </Link>
                         </div>
                         <!-- Success message -->
                         <div v-if="$page.props.flash.success" class="bg-[#d4edda] mb-4 p-4">
@@ -54,12 +52,14 @@ import AdminNavbar from '@/Components/AdminNavbar.vue'
                                 <tr class="bg-[#c3c3c3] border border-gray-400">
                                     <th class="p-4 w-[10%]">No</th>
                                     <th class="p-4">Name</th>
+                                    <th class="p-4">Action</th>
                                 </tr>
                             </thead>
                             <tbody v-for="(item, index) in $page.props.teams.data" :key="index">
                                 <tr class="border border-gray-400">
                                     <td class="p-4 w-[10%]">{{ index + 1 }}</td>
                                     <td class="p-4">{{ item.name }}</td>
+                                    <td class="p-4 underline text-blue-500"><Link :href="route('teams.edit', item.id)">Edit</Link></td>
                                 </tr>
                             </tbody>
                         </table>

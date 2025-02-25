@@ -1,4 +1,3 @@
 <template>
-    <!-- <img src="/images/rralogo.jpg" alt=""> -->
-     <h1></h1>
+    <img src="/images/admin_assets/ruparaya-logo.png" alt="">
 </template>

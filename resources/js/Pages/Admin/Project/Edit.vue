@@ -10,10 +10,10 @@ import { QuillEditor } from '@vueup/vue-quill'
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 const page = usePage();
 const form = useForm({
-    project_number: page.props.project.project_number?.split('-') || [' ', ' '],
-    project_number_a: page.props.project.project_number?.split('-')[0] || '',
-    project_number_b: page.props.project.project_number?.split('-')[1] || '',
+    project_code_id: page.props.project.project_code.id,
+    project_number: page.props.project.project_number,
     title: page.props.project.title,
+    link: page.props.project.link,
     banner: page.props.project.banner_img,
     new_banner: null,
     client_id: page.props.project.client.id,
@@ -56,6 +56,18 @@ const handleFileChange = (event) => {
 const logSelectedOption = (value) => {
     console.log('Selected Option:', form.mentor_id);
 }
+
+const addLeadingZeros = (value, length = 4) => {
+    return value.length < length ? value.toString().padStart(length, '0') : value;
+};
+
+const handleProjectNumberInput = (event) => {
+    let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    if (value.length === 1) {
+        value = value.padStart(1, '0'); // Add a single leading zero for single digits
+    }
+    form.project_number = value; // Update form value
+};
 </script>
 
 <style>
@@ -93,31 +105,31 @@ input:disabled {
                         <input type="hidden" name="_token" :value="csrfToken">
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
                             <div class="col-span-2">
-                                <label for="project_number_b">Project Number *</label>
+                                <label for="project_number">Project Number*</label>
                                 <div class=" ">
                                     <div class="relative rounded-md flex items-center">
-                                        <input type="text" name="project_number_a" v-model="form.project_number_a" id="project_number_a" class="w-[80px]">
-                                        <!-- <select name="project_number_a" v-model="form.project_number_a" id="project_number_a">
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                        </select> -->
+                                        <select name="project_code_id"
+                                                id="project_code_id"
+                                                v-model="form.project_code_id"
+                                                class="min-w-[100px] border-0 ring-gray-300">
+                                            <option :value="$page.props.project.project_code.id">{{ $page.props.project.project_code.code }}</option>
+                                            <option v-for="(item, index) in $page.props.projectCodes" :key="index" :value="item.id">{{ item.code }}</option>
+                                        </select>
                                         <span class="mx-3"> - </span>
-                                        <input class="w-full border-0 ring-gray-300 rounded-md"
-                                                v-model="form.project_number_b"
-                                                name="project_number_b"
-                                                id="project_number_b"
-                                                pattern="[0-9 ]+"
-                                                placeholder="Type a number...">
-                                        <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">Jam</div> -->
+                                            <input class="w-full border-0 ring-gray-300 rounded-md"
+                                            :value="form.project_number"
+                                            name="project_number"
+                                            id="project_number"
+                                            @input="handleProjectNumberInput"
+                                            type="number"
+                                            placeholder="Type a number...">
                                     </div>
                                 </div>
-                                <span class="text-red-500 text-xs">{{ form.errors.project_number_b }}</span>
-                                <span class="text-red-500 text-xs">{{ form.errors.project_number_a }}</span>
+                                <span class="text-red-500 text-xs">{{ form.errors.project_number }}</span>
                             </div>
 
                             <div class="mb-4 col-span-4">
-                                <label for="title">Title *</label>
+                                <label for="title">Title*</label>
                                 <input class="w-full border-0 rounded-md ring-gray-300"
                                         v-model="form.title"
                                         name="title" id="title"
@@ -128,15 +140,15 @@ input:disabled {
                         </div>
 
                         <div class="mb-4">
-                            <label for="banner">Upload Banner *</label>
+                            <label for="banner">Upload Banner*</label>
                             <div class="border border-black p-2 mb-2 w-fit">
-                                <small>banner saat ini</small>
+                                <small>current banner</small>
                                 <img :src="'/storage/'+form.banner" alt="" class="h-44">
                             </div>
                             <span class="text-red-500 text-xs">{{ form.errors.new_banner }}</span>
                         </div>
                         <div class="mb-4">
-                            <label for="banner">Upload Image *</label>
+                            <label for="banner">Upload Image*</label>
                             <input class="w-full border-0 rounded-md ring-gray-300" name="banner" id="banner" type="file" @change="bannerFile">
                             <span class="text-red-500 text-xs">{{ form.errors.banner }}</span>
                         </div>
@@ -144,25 +156,22 @@ input:disabled {
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
 
                             <div class="col-span-3">
-                                <label for="client_id">Client Name *</label>
+                                <label for="client_id">Client Name*</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <!-- <input class="w-full border-0 ring-gray-300" v-model="form.client_id" name="client_id" id="client_id" type="text"> -->
                                      <select name="client_id"
                                             id="client_id"
                                             v-model="form.client_id"
                                             class="w-full border-0 ring-gray-300">
-                                            <option :value="$page.props.project.client.id">{{ $page.props.project.client.name }} - {{ $page.props.project.client.related_person }}</option>
-                                            <option v-for="(item, index) in $page.props.clients" :key="index" :value="item.id">{{ item.name }} - {{ item.related_person }}</option>
+                                            <option :value="$page.props.project.client.id">{{ $page.props.project.client.name_jp }} - {{ $page.props.project.client.name_en  }}</option>
+                                            <option v-for="(item, index) in $page.props.clients" :key="index" :value="item.id">{{ item.name_jp }} - {{ item.name_en }}</option>
                                     </select>
-                                    <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
                                 <span class="text-red-500 text-xs">{{ form.errors.times_of_meeting }}</span>
                             </div>
 
                             <div class="col-span-3">
-                                <label for="team_id">Team Name *</label>
+                                <label for="team_id">Team Name*</label>
                                 <div class="relative rounded-md overflow-hidden">
-                                    <!-- <input class="w-full border-0 ring-gray-300" v-model="form.team_id" name="team_id" id="team_id" type="text"> -->
                                     <select name="team_id"
                                             id="team_id"
                                             v-model="form.team_id"
@@ -170,10 +179,18 @@ input:disabled {
                                             <option :value="$page.props.project.team.id">{{ $page.props.project.team.name }}</option>
                                             <option v-for="(item, index) in $page.props.teams" :key="index" :value="item.id">{{ item.name }}</option>
                                     </select>
-                                    <!-- <div class="absolute top-0 left-0 bg-gray-300 h-full w-14 flex items-center justify-center">X</div> -->
                                 </div>
                                 <span class="text-red-500 text-xs">{{ form.errors.team_id }}</span>
                             </div>
+                        </div>
+                        <div class="relative rounded-md overflow-hidden">
+                            <label for="link">link*</label>
+                            <input class="w-full border-0 rounded-md ring-gray-300"
+                                    v-model="form.link"
+                                    name="link" id="link"
+                                    type="text"
+                                    placeholder="Add link...">
+                            <span class="text-red-500 text-xs">{{ form.errors.link }}</span>
                         </div>
 
                         <div class="mb-4">

@@ -67,17 +67,28 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(client $client)
+    public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        return Inertia::render('Admin/Client/Edit', [
+            'client' => $client,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateclientRequest $request, client $client)
+    public function update(UpdateclientRequest $request, $id)
     {
-        //
+        $client = Client::find($id);
+
+        $client->name_jp         =   $request->name_jp;
+        $client->name_en         =   $request->name_en;
+        $client->slug         =   Str::slug($request->name).'-'.Str::random(6);
+        return dd($request);
+        $client->save();
+
+        return redirect()->route('clients.index')->with('success','Success Updating Teams');
     }
 
     public function search(Request $request)

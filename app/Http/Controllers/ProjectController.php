@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Client;
+use App\Models\ProjectCode;
 use App\Models\Team;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::where('isActive', 1)->with(['client', 'team'])->latest()->paginate(25);
+        $project = Project::where('isActive', 1)->with(['client', 'team', 'projectCode', 'user'])->latest()->paginate(25);
         return Inertia::render('Admin/Project/Index', [
             'project' => $project,
         ]);
@@ -35,6 +36,7 @@ class ProjectController extends Controller
         return Inertia::render('Admin/Project/Create', [
             'client' => Client::all(),
             'team' => Team::all(),
+            'projectCode' => ProjectCode::all(),
         ]);
     }
 
@@ -44,15 +46,15 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'                 => 'required|min:5',
+            'title'               => 'required',
 
-            'banner'                => 'required|mimes:jpeg,png,jpg,webp|max:10240',
-            'project_number_a'      => 'required',
-            'project_number_b'      => 'required',
+            'banner'              => 'required|mimes:jpeg,png,jpg,webp|max:10240',
+            'project_number'      => 'required',
 
+            'project_code_id'     => 'required',
             'client_id'           => 'required',
             'team_id'             => 'required',
-            'description'           => 'required|min:5',
+            'description'         => 'required|min:5',
         ]);
 
 
@@ -61,14 +63,16 @@ class ProjectController extends Controller
 
         $project = new Project();
 
-        $project->project_code          =   strtoupper($request->project_number_a);
-        $project->project_number        =   $request->project_number_b;
+        $project->project_number        =   $request->project_number;
         $project->title                 =   $request->title;
 
 
         $project->banner_img            =   $bannerPath;
         $project->client_id             =   $request->client_id;
         $project->team_id               =   $request->team_id;
+        $project->user_id               =   auth()->id();
+        $project->link                  =   $request->link;
+        $project->project_code_id       =   $request->project_code_id;
         $project->isActive              =   1;
         $project->slug                  =   Str::slug($request->title).'-'.Str::random(6);
 
@@ -85,7 +89,7 @@ class ProjectController extends Controller
      */
     public function show(string $slug)
     {
-        $projectNow = Project::where('slug', $slug)->with(['client', 'team'])->first();
+        $projectNow = Project::where('slug', $slug)->with(['client', 'team', 'projectCode', 'user'])->first();
         return Inertia::render('Admin/Project/Detail', [
             'project' => $projectNow
         ]);
@@ -96,13 +100,12 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        $project = Project::with('client', 'team')->find($id);
-        $clients = Client::all();
-        $teams = Team::all();
+        $project = Project::with('client', 'team', 'projectCode', 'user')->find($id);
         return Inertia::render('Admin/Project/Edit', [
             'project' => $project,
             'clients' => Client::all(),
             'teams' => Team::all(),
+            'projectCodes' => ProjectCode::all(),
         ]);
     }
 
@@ -112,10 +115,10 @@ class ProjectController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title'                  => 'required|min:5',
+            'title'                  => 'required',
             // 'new_banner'            => 'required|mimes:jpeg,png,jpg,webp|max:10240',
-            'client_id'            => 'required',
-            'team_id'              => 'required',
+            'client_id'              => 'required',
+            'team_id'                => 'required',
             'project_number'         => 'required',
             'description'            => 'required|min:5',
 
@@ -131,10 +134,11 @@ class ProjectController extends Controller
             $project->banner_img = $request->banner;
         }
 
-        $project->project_number         =   $request->project_number_a . ' - ' . $request->project_number_b;
+        $project->project_number         =   $request->project_number;
         $project->title                  =   $request->title;
         $project->client_id             =   $request->client_id;
         $project->team_id               =   $request->team_id;
+        $project->link               =   $request->link;
         $project->description            =   $request->description;
 
         if ($request->new_banner !== null) {
@@ -144,7 +148,7 @@ class ProjectController extends Controller
             $project->banner_img             = $request->banner;
         }
         $project->save();
-        return redirect()->route('project.index')->with('success','Success Update Project');
+        return redirect()->route('project.index')->with('success','Success Updating Project');
     }
 
     /**
@@ -187,10 +191,17 @@ class ProjectController extends Controller
             {
                 $query->where('name_en', 'like', '%' . $searchTerm . '%');
             })
-            ->orWhere('project_code', 'like', '%' . $searchTerm . '%')
+            ->orWhereHas('projectCode', function($query) use ($searchTerm)
+            {
+                $query->where('code', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhereHas('user', function($query) use ($searchTerm)
+            {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            })
             ->orWhere('title', 'like', '%' . $searchTerm . '%')
             ->orderBy('id', 'desc')
-            ->with(['client', 'team'])
+            ->with(['client', 'team', 'projectCode'])
             ->latest()
             ->paginate(25);;
 

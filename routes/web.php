@@ -71,7 +71,7 @@ Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
 
             Route::get('/detail/{slug}', [TeamController::class, 'show'])->name('teams.detail');
 
-            // create
+        // create
             Route::get('/create', [TeamController::class, 'create'])->name('teams.create');
             Route::post('/', [TeamController::class, 'store'])->name('teams.store');
 
@@ -85,6 +85,9 @@ Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
             //
             Route::get('/search',[TeamController::class, 'search'])->name('teams.search');
     });
+
+
+    // For changing the project code to dropdown - 28/01/2024
 
     Route::group(['prefix' => 'project-code'],function () {
             Route::get('/', [ProjectCodeController::class, 'index'])->name('projectCode.index');
@@ -142,10 +145,10 @@ Route::middleware(['auth', 'verified'])->prefix('')->group( function () {
 });
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';

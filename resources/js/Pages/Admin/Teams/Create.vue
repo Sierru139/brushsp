@@ -68,7 +68,7 @@ input:disabled {
                         <input type="hidden" name="_token" :value="csrfToken">
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4 items-center justify-center">
                             <div class="mb-4 col-span-3">
-                                <label for="name">Team Name *</label>
+                                <label for="name">Team Name*</label>
                                 <input class="w-full border-0 rounded-md ring-gray-300"
                                         v-model="form.name"
                                         name="name" id="name"

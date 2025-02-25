@@ -65,17 +65,29 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Team $client)
+    public function edit($id)
     {
-        //
+        $team = Team::find($id);
+        return Inertia::render('Admin/Teams/Edit', [
+            'team' => $team,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateclientRequest $request, Team $client)
+    public function update(UpdateclientRequest $request, $id)
     {
-        //
+        $request->validate([
+            'name'                  => 'required',
+        ]);
+        $team = Team::find($id);
+
+        $team->name         =   $request->name;
+        $team->slug         =   Str::slug($request->name).'-'.Str::random(6);
+        $team->save();
+
+        return redirect()->route('teams.index')->with('success','Success Updating Teams');
     }
 
     public function search(Request $request)

@@ -41,6 +41,8 @@ import { Head, Link } from '@inertiajs/vue3';
                                     <img :src="'/storage/'+$page.props.project.banner_img" alt="" width="400" height="275">
                                 </div>
                                 <br>
+                                <h2>Link : <br><a :href="$page.props.project.link" class="text-blue-500 hover:underline">{{$page.props.project.link}}</a></h2>
+                                <br>
                                 <h2>Client name : <br>{{$page.props.project.client.name_jp}} - {{$page.props.project.client.name_en}}</h2>
                                 <br>
                                 <h2>Team name : <br>{{$page.props.project.team.name}}</h2>
@@ -49,7 +51,7 @@ import { Head, Link } from '@inertiajs/vue3';
                                 <br>
                                 <div class="customHtml">
                                     Description : <br>
-                                    <div v-html="$page.props.project.description"></div>
+                                    <div v-html="convertToLink($page.props.project.description)"></div>
                                 </div>
                                 <br>
                             </div>
@@ -60,8 +62,25 @@ import { Head, Link } from '@inertiajs/vue3';
             </div>
         </div>
 </template>
+<script>
+export default {
+    data() {
+        return {
+        inputText: "Cek informasi di https://example.com dan https://google.com",
+        };
+    },
+    methods: {
+        convertToLink(text) {
+            if (!text) return "";
+            const pattern = /(https?:\/\/[^\s<>]+)/g;
+            return text.replace(pattern, '<a class="text-blue-500 hover:underline" href="$1" target="_blank">$1</a>');
+        }
+    },
+};
+</script>
 <style>
 .customHtml {
     all: revert !important;
 }
 </style>
+

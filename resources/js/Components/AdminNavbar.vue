@@ -19,12 +19,12 @@ import { Link } from '@inertiajs/vue3';
     };
 </script>
 <template>
-    <nav class="lg:max-w-[280px] max-lg:fixed top-0 h-full max-lg:w-full">
+    <nav class="lg:max-w-[280px] max-lg:sticky top-0 max-lg:w-full">
         <div class="max-lg:max-w-[1440px] max-lg:flex justify-between items-center mx-auto py-3 max-lg:px-2 border-gray-700 bg-gray-200 bg-opacity-80 backdrop-blur-md z-[999]">
             <!-- Logo -->
             <div class="lg:mb-4">
                 <Link :href="route('admin.index')">
-                    <img class="lg:w-48 w-32 max-sm:hidden mx-auto" src="/images/admin_assets/ruparaya-logo.png" alt="Logo">
+                    <img class="lg:w-48 w-28 max-sm:hidden mx-auto" src="/images/admin_assets/ruparaya-logo.png" alt="Logo">
                 </Link>
                 <Link :href="route('admin.index')">
                     <img class="w-16 sm:hidden mx-auto" src="/images/admin_assets/ruparaya-logo.png" alt="Logo">

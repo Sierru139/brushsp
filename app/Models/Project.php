@@ -20,4 +20,12 @@ class Project extends Model
         return $this->belongsTo(Team::class);
     }
 
+    public function projectCode() {
+        return $this->belongsTo(ProjectCode::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
 }
