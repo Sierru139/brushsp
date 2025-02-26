@@ -41,7 +41,7 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Project" />
     <div class="lg:flex">
         <AdminNavbar></AdminNavbar>
         <div class="w-full">

@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, usePage} from '@inertiajs/vue3';
+import { Head, useForm, usePage, Link} from '@inertiajs/vue3';
 const date = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Tokyo' })
 
 </script>
@@ -30,10 +30,11 @@ export default {
 <template>
     <Head title="Dashboard" />
 
-    <div class="flex">
+    <div class="lg:flex">
         <AdminNavbar></AdminNavbar>
-        <div class="w-full bg-gray-200 max-lg:mt-[80px]">
-            <div class="text-center mb-6 mt-10">
+        <div class="w-full bg-gray-200">
+            <Link :href="route('logout')" class="text-right block pr-10 pt-5 absolute right-0">Log Out</Link>
+            <div class="text-center pb-6 pt-10">
                 <span class="text-6xl text-gray-700">
                     {{ dateTime }}
                 </span>
@@ -44,7 +45,7 @@ export default {
             </div>
 
             <div class="my-3 text-center">
-                <p>Hello {{ $page.props.user.name }} !</p>
+                <p>Hallo {{ $page.props.user.name }} !</p>
             </div>
 
             <div class="flex flex-wrap w-full py-6 gap-y-4">

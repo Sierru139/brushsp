@@ -63,18 +63,6 @@ import { Link } from '@inertiajs/vue3';
                        >
                        Project Code
                 </Link>
-                <!-- <Link :href="route('gallery.index')"
-                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/gallery' }"
-                       >
-                       Galeri
-                </Link>
-                <Link :href="route('blog.index')"
-                       class="block py-4 px-3 font-semibold tracking-wide hover:text-gray-300 hover:bg-[#6f7583] duration-300"
-                       :class="{ 'bg-[#375980] text-gray-50': $page.url === '/admin/blog' }"
-                       >
-                       Berita
-                </Link> -->
             </div>
 
             <!-- Contact Button (Always Visible) -->
