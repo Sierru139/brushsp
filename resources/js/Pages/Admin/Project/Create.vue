@@ -97,11 +97,6 @@ input:disabled {
                                             <!-- <option value="Client_2">Test</option> -->
                                             <option v-for="(item, index) in $page.props.projectCode" :key="index" :value="item.id">{{ item.code }}</option>
                                         </select>
-                                        <!-- <select name="project_code_id" v-model="form.project_code_id" id="project_code_id">
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                        </select> -->
                                         <span class="mx-3"> - </span>
                                         <input class="w-full border-0 ring-gray-300 rounded-md"
                                                 :value="form.project_number"
@@ -130,18 +125,17 @@ input:disabled {
 
                         <div class="mb-4">
                             <label for="banner">Upload Image*</label>
-                            <input class="w-full border-0 rounded-md ring-gray-300" name="banner" id="banner" type="file" @change="bannerFile">
+                            <input class="w-full border-0 rounded-md ring-gray-300" name="banner" id="banner" type="file" multiple @change="bannerFile">
                             <span class="text-red-500 text-xs">{{ form.errors.banner }}</span>
                         </div>
 
-                        <!-- <h2 class="text-2xl font-bold mb-3 border-b-2 inline-block">Tanggal</h2> -->
                         <div class="mb-6 sm:grid grid-cols-6 gap-3 border-b-2 pb-4">
 
                             <div class="col-span-3">
                                 <label for="client_id">Client Name*</label>
                                 <div class="relative rounded-md overflow-hidden">
                                     <!-- <input class="w-full border-0 ring-gray-300" v-model="form.client_id" name="client_id" id="client_id" type="text"> -->
-                                     <select name="client_id"
+                                    <select name="client_id"
                                             id="client_id"
                                             v-model="form.client_id"
                                             class="w-full border-0 ring-gray-300">
